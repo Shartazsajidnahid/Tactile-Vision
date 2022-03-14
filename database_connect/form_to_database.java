@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class HelloApplication extends Application {
@@ -108,6 +109,7 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -117,6 +119,26 @@ public class HelloApplication extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        retrive();
+       // launch(args);
+    }
+
+    private static void retrive() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
+
+            String query = "select * from students";
+
+            Statement sta = connection.createStatement();
+            ResultSet x = sta.executeQuery(query);
+
+            while(x.next()){
+                System.out.println(x.getString(1)+" " + x.getString(2)+" " +x.getString(3));
+            }
+
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 }
