@@ -121,7 +121,7 @@ public class HelloApplication extends Application {
         try (
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1,9);
+            pstmt.setInt(1,id);
             pstmt.setString(2, name);
             pstmt.setString(3, email);
             pstmt.executeUpdate();
