@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -13,114 +14,86 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class HelloApplication extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Registration");
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setPadding(new Insets(25, 25, 25, 25));
-        Scene scene = new Scene(pane, 300, 275);
+    public void start(Stage stage) {
+        //Creating nodes
+        TextField textField1 = new TextField();
+        TextField textField2 = new TextField();
+        Button button = new Button("Push");
+        Button button2 = new Button("Pull");
+        button.setTranslateX(220);
+        button.setTranslateY(75);
+        button2.setTranslateX(280);
+        button2.setTranslateY(75);
+        //Creating labels
+        Label label1 = new Label("Name: ");
+        Label label2 = new Label("Email: ");
+        //Setting the message with read data
+        Text text = new Text("");
+        //Setting font to the label
+        Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 10);
 
-        Text sceneTitle = new Text("Tax Calculator");
-        sceneTitle.setFont(Font.font("Arial", FontWeight.NORMAL,20));
-        pane.add(sceneTitle, 0, 0, 2, 1);
-        Label total = new Label("Name:");
-        pane.add(total, 0, 1);
-        final TextField totalField = new TextField();
-        pane.add(totalField, 1, 1);
-        Label percent = new Label("Email:");
-        pane.add(percent,0,2);
-        final TextField percentField = new TextField();
-        pane.add(percentField, 1, 2);
-
-        Button calculateButton = new Button("Create Account");
-        HBox hbox = new HBox(10);
-        hbox.setAlignment(Pos.BOTTOM_RIGHT);
-        hbox.getChildren().add(calculateButton);
-        pane.add(hbox, 1, 4);
-
-        final Text taxMessage = new Text();
-        pane.add(taxMessage, 1, 6);
-
-        calculateButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-            }
-
-            public void actionPerformed(ActionEvent e) {
-                String firstName = totalField.getText();
-                String emailId = percentField.getText();
-                int ID = 5032;
-
-
-                String msg = "" + firstName;
-                msg += " \n";
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText("confirmation");
-
-                alert.setContentText(msg);
-                alert.showAndWait();
-
-                try {
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
-
-                    String query = "INSERT INTO students (studentID, name, email)  VALUES (ID,firstName,emailId)";
-
-                    Statement sta = connection.createStatement();
-                    int x = sta.executeUpdate(query);
-
-
-
-                    if (x == 0) {
-                        alert.setContentText("This is alredy exist");
-                    } else {
-
-                        alert.setContentText("Your account is sucessfully created");
-                    }
-                    alert.showAndWait();
-                    connection.close();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
+        //Displaying the message
+        button2.setOnAction(e -> {
+            //Retrieving data
+            retrive();
         });
+        /*text.setFont(font);
+        text.setTranslateX(15);
+        text.setTranslateY(125);
+        text.setFill(Color.BROWN);
+        text.maxWidth(580);
+        text.setWrappingWidth(580);*/
+        button.setOnAction(e -> {
 
+            String name = textField1.getText();
+            String email = textField2.getText();
 
-
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            //text.setText("Hello "+name+"Welcome to Tutorialspoint. From now, we will   communicate with you at "+email);
+            insert(name, email);
+        });
+        //Adding labels for nodes
+        HBox box = new HBox(5);
+        box.setPadding(new Insets(25, 5 , 5, 50));
+        box.getChildren().addAll(label1, textField1, label2, textField2);
+        Group root = new Group(box, button,button2, text);
+        //Setting the stage
+        Scene scene = new Scene(root, 595, 150, Color.BEIGE);
+        stage.setTitle("Text Field Example");
+        stage.setScene(scene);
+        stage.show();
     }
-
-
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        retrive();
-       // launch(args);
+
+        launch(args);
+
+    }
+    private static void showalert(String firstName, String emailId){
+
+        int ID = 5032;
+
+
+        String msg = "" + firstName + " " + emailId;
+        msg += " \n";
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("confirmation");
+
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 
     private static void retrive() {
@@ -140,5 +113,21 @@ public class HelloApplication extends Application {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+    private static void insert(String name, String email){
+        //System.out.println(name+" " + email);
+        String sql = "INSERT INTO students(studentID,name,email) VALUES(?,?,?)";
+
+        try (
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,9);
+            pstmt.setString(2, name);
+            pstmt.setString(3, email);
+            pstmt.executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+
     }
 }
