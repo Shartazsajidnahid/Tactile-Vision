@@ -47,8 +47,8 @@ public class HelloApplication extends Application {
 
         //Displaying the message
         button2.setOnAction(e -> {
-            //Retrieving data
             retrive();
+
         });
         /*text.setFont(font);
         text.setTranslateX(15);
@@ -75,17 +75,13 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     public static void main(String[] args) {
 
-        launch(args);
-
+        //launch(args);
+        del();
     }
     private static void showalert(String firstName, String emailId){
-
-        int ID = 5032;
-
-
         String msg = "" + firstName + " " + emailId;
         msg += " \n";
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -117,6 +113,7 @@ public class HelloApplication extends Application {
     private static void insert(String name, String email){
         //System.out.println(name+" " + email);
         String sql = "INSERT INTO students(studentID,name,email) VALUES(?,?,?)";
+        int id = getlastid();
 
         try (
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
@@ -127,6 +124,47 @@ public class HelloApplication extends Application {
             pstmt.executeUpdate();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
+        }
+    }
+    private static int getlastid(){
+        int id = -1;
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
+
+            String query = "select * from students";
+
+            Statement sta = connection.createStatement();
+            ResultSet x = sta.executeQuery(query);
+            while(x.next()){
+                id = x.getInt(1);
+            }
+
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return id+1;
+    }
+
+    private static void del() {
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tactilevision", "root", "Kakashi");
+            Statement stmt = conn.createStatement();
+        ) {
+            String QUERY = "select * from students";
+            String sql = "DELETE FROM students " +
+                    "WHERE studentID = 786";
+            stmt.executeUpdate(sql);
+            ResultSet rs = stmt.executeQuery(QUERY);
+            while(rs.next()){
+                //Display values
+                System.out.print("ID: " + rs.getInt(1));
+                System.out.print(", name: " + rs.getString(2));
+                System.out.println(", email: " + rs.getString(3));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
     }
