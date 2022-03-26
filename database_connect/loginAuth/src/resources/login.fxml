@@ -1,19 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="389.0" fitWidth="379.0" layoutX="-1.0" layoutY="4.0" pickOnBounds="true" />
-         </children>
-      </AnchorPane>
-   </right>
-</BorderPane>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<GridPane fx:controller="com.example.javafxloginformjdbctutorial.LoginController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center"
+          hgap="10" vgap="10">
+   <padding>
+      <Insets top="40" right="40" bottom="40" left="40"/>
+   </padding>
+   <columnConstraints>
+      <ColumnConstraints minWidth="100" prefWidth="100"
+                         maxWidth="Infinity" halignment="RIGHT"></ColumnConstraints>
+      <ColumnConstraints minWidth="200" prefWidth="200"
+                         maxWidth="Infinity" hgrow="ALWAYS"></ColumnConstraints>
+   </columnConstraints>
+   <!-- Add Header Label -->
+   <Label text="Login Form (FXML)" GridPane.columnIndex="0"
+          GridPane.rowIndex="0" GridPane.columnSpan="2"
+          GridPane.rowSpan="1" GridPane.halignment="CENTER" >
+      <font>
+         <Font name="Arial" size="24" ></Font>
+      </font>
+      <GridPane.margin>
+         <Insets top="20" right="0" bottom="20" left="0"></Insets>
+      </GridPane.margin>
+   </Label>
+   <!-- Add Email Label -->
+   <Label text="Email ID : " GridPane.columnIndex="0"
+          GridPane.rowIndex="2" ></Label>
+   <!-- Add Email Text Field -->
+   <TextField fx:id="emailIdField" prefHeight="40"
+              GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+   <!-- Add Password Label -->
+   <Label text="Password : " GridPane.columnIndex="0"
+          GridPane.rowIndex="3" ></Label>
+   <!-- Add Password Field -->
+   <PasswordField fx:id="passwordField" prefHeight="40"
+                  GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+   <!-- Add Submit Button -->
+   <Button fx:id="submitButton" text="Submit"
+           prefWidth="100" prefHeight="40" defaultButton="true"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"
+           GridPane.columnSpan="2" GridPane.rowSpan="1"
+           GridPane.halignment="CENTER"
+           onAction="#login">
+      <GridPane.margin>
+         <Insets top="20" right="0" bottom="20" left="0"></Insets>
+      </GridPane.margin>
+   </Button>
+</GridPane>
