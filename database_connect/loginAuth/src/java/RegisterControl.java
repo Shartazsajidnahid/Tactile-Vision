@@ -1,19 +1,35 @@
-package com.example.javafxloginformjdbctutorial;
+package com.example.javafxloginformjdbctutorial.Controllers;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Objects;
 
+
+import com.example.javafxloginformjdbctutorial.HelloApplication;
+import com.example.javafxloginformjdbctutorial.JdbcDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class RegisterControl {
-
+    @FXML
+    public AnchorPane everything;
+    public Button changetoLogin;
     @FXML
     private TextField fullNameField;
 
@@ -71,4 +87,22 @@ public class RegisterControl {
         alert.initOwner(owner);
         alert.show();
     }
+
+
+
+    public void loadLogin(ActionEvent actionEvent) throws IOException {
+        Pane view = null;
+        try {
+            URL fileUrl = HelloApplication.class.getResource("login.fxml");
+            if(fileUrl == null){
+                throw new java.io.FileNotFoundException("fxml file not found");
+            }
+            view = new FXMLLoader().load(fileUrl);
+        }catch (Exception e){
+            System.out.println("file not found");
+        }
+        FXMLLoader login = new FXMLLoader();
+        everything.getChildren().setAll(view);
+    }
+
 }

@@ -10,7 +10,7 @@ public class JdbcDao {
     private static final String DATABASE_PASSWORD = "Kakashi";
     private static final String INSERT_QUERY = "INSERT INTO students(studentID,name,email,password) VALUES (?, ?, ?,?)";
     private static final String RETRIEVE_QUERY = "select * from students";
-
+    private static final String SELECT_QUERY = "SELECT * FROM students WHERE email = ? and password = ?";
 
 
     public void insertRecord(String fullName, String emailId, String password) throws SQLException {
@@ -34,6 +34,7 @@ public class JdbcDao {
             // print SQL exception information
             printSQLException(e);
         }
+        retrive();
     }
     private static void retrive() {
         try {
@@ -95,6 +96,32 @@ public class JdbcDao {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean validate(String emailId, String password) throws SQLException {
+
+        // Step 1: Establishing a Connection and
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY)) {
+            preparedStatement.setString(1, emailId);
+            preparedStatement.setString(2, password);
+
+            System.out.println(preparedStatement);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+
+
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+        return false;
     }
 
     public static void printSQLException(SQLException ex) {

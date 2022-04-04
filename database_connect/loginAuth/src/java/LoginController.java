@@ -1,17 +1,26 @@
-package com.example.javafxloginformjdbctutorial;
+package com.example.javafxloginformjdbctutorial.Controllers;
 
+import java.net.URL;
 import java.sql.SQLException;
 
+import com.example.javafxloginformjdbctutorial.HelloApplication;
+import com.example.javafxloginformjdbctutorial.JdbcDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 
 public class LoginController {
+
+    @FXML
+    public AnchorPane everything;
 
     @FXML
     private TextField emailIdField;
@@ -69,5 +78,20 @@ public class LoginController {
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
+    }
+
+    public void loadRegister(ActionEvent actionEvent) {
+        Pane view = null;
+        try {
+            URL fileUrl = HelloApplication.class.getResource("registration_form.fxml");
+            if(fileUrl == null){
+                throw new java.io.FileNotFoundException("fxml file not found");
+            }
+            view = new FXMLLoader().load(fileUrl);
+        }catch (Exception e){
+            System.out.println("file not found");
+        }
+        FXMLLoader login = new FXMLLoader();
+        everything.getChildren().setAll(view);
     }
 }
