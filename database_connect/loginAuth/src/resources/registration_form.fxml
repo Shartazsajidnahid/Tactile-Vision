@@ -13,16 +13,16 @@
 
 <AnchorPane fx:id="everything" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.RegisterControl">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="978.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="487.0" minWidth="10.0" prefWidth="377.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.0" minWidth="10.0" prefWidth="601.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="114.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="431.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="122.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="978.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="487.0" minWidth="10.0" prefWidth="268.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="710.0" minWidth="10.0" prefWidth="710.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="564.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="122.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <GridPane alignment="center" hgap="10" prefHeight="622.0" prefWidth="803.0" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <padding>
@@ -42,7 +42,7 @@
                   <RowConstraints />
                </rowConstraints>
                <children>
-                  <Label text="Registration Form (FXML)" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="1">
+                  <Label text="Registration" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="1">
                      <font>
                         <Font name="veranda" size="24" />
                      </font>
@@ -56,7 +56,7 @@
                   <TextField fx:id="emailIdField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Password : " GridPane.rowIndex="4" />
                   <PasswordField fx:id="passwordField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button fx:id="submitButton" defaultButton="true" onAction="#register" prefHeight="40" prefWidth="100" style="-fx-background-color: #E96151;" text="Submit" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.rowSpan="1">
+                  <Button fx:id="submitButton" defaultButton="true" prefHeight="40" prefWidth="100" style="-fx-background-color: #E96151;" text="Submit" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.rowSpan="1">
                      <GridPane.margin>
                         <Insets bottom="20" left="0" right="0" top="20" />
                      </GridPane.margin>
@@ -64,7 +64,13 @@
                   <Button fx:id="changetoLogin" mnemonicParsing="false" onAction="#loadLogin" text="Click to Login" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="568.0" prefWidth="377.0" style="-fx-background-color: #192a56;" GridPane.rowSpan="3" />
+            <AnchorPane prefHeight="676.0" prefWidth="311.0" style="-fx-background-color: #192a56;" GridPane.rowSpan="3">
+               <children>
+                  <Button layoutX="78.0" layoutY="81.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="About Us" />
+                  <Button layoutX="78.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Help" />
+                  <Button layoutX="78.0" layoutY="227.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Translate" />
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </children>
