@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.List;
 
 
 public class TranslateControl {
@@ -45,6 +46,18 @@ public class TranslateControl {
         FXMLLoader login = new FXMLLoader();
         everything.getChildren().setAll(view);
     }
+
+    public void addDynamicButton(String name){
+
+        vbox.setSpacing(10);
+//        for( int i=0; i < 10; i++) {
+//            Button button = new Button("Buttons" + i);
+//            vbox.getChildren().add( button);
+//        }
+        Button button = new Button(name);
+        vbox.getChildren().add( button);
+    }
+
     public void addPhotos() throws MalformedURLException {
         Stage primaryStage = (Stage)(everything.getScene().getWindow());
         final Stage stage = new Stage();
@@ -58,27 +71,19 @@ public class TranslateControl {
 
         FileChooser fileChooser = new FileChooser();
        // Stage stage = (Stage)(everything.getScene().getWindow());
-        File file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
-            ImageView imageView = new ImageView();
-            String imagepath = file.toURI().toURL().toString();
-            System.out.println("file:"+imagepath);
-            Image image = new Image(imagepath);
-            imageView.setImage(image);
-            Group root = new Group(imageView);
-            Scene scene = new Scene(root, 595, 370);
-            stage.setTitle("Displaying Image");
-            stage.setScene(scene);
-            stage.show();
+        List<File> fileList =  fileChooser.showOpenMultipleDialog(stage);
+
+        if (fileList != null) {
+
+
+            for(File file: fileList){
+                ImageView imageView = new ImageView();
+                String imagepath = file.toURI().toURL().toString();
+               // System.out.println(file.getName());
+                addDynamicButton(file.getName());
+            }
+
          }
     }
-    public void addDynamicButton(){
 
-        vbox.setSpacing(10);
-        for( int i=0; i < 10; i++) {
-            Button button = new Button("Buttons" + i);
-            vbox.getChildren().add( button);
-        }
-
-    }
 }
