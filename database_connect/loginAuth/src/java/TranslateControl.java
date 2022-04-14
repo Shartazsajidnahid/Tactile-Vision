@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -23,6 +25,11 @@ import java.net.URL;
 public class TranslateControl {
     @FXML
     public AnchorPane everything;
+    @FXML
+    public GridPane gridpane;
+    @FXML
+    public VBox vbox;
+
 
     public void toWelcome(ActionEvent actionEvent) {
         Pane view = null;
@@ -64,6 +71,14 @@ public class TranslateControl {
             stage.setScene(scene);
             stage.show();
          }
+    }
+    public void addDynamicButton(){
+
+        vbox.setSpacing(10);
+        for( int i=0; i < 10; i++) {
+            Button button = new Button("Buttons" + i);
+            vbox.getChildren().add( button);
+        }
 
     }
 }
