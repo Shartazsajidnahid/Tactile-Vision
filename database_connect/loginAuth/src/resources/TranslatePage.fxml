@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="everything" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.TranslateControl">
     <children>
-        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="978.0">
+        <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="978.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="487.0" minWidth="10.0" prefWidth="268.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="710.0" minWidth="10.0" prefWidth="710.0" />
@@ -19,17 +21,35 @@
                 <RowConstraints maxHeight="122.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
+            <GridPane fx:id="gridpane" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="234.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="476.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="490.0" minHeight="10.0" prefHeight="485.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addDynamicButton" text="Dynamic ADD" GridPane.columnIndex="1" />
+                        <Button fx:id="addPhotos" defaultButton="true" onAction="#addPhotos" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #E96151;" text="Add Photos">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
                 <AnchorPane prefHeight="676.0" prefWidth="311.0" style="-fx-background-color: #192a56;" GridPane.rowSpan="3">
                     <children>
                         <Button layoutX="78.0" layoutY="81.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="About Us" />
                         <Button layoutX="78.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Help" />
                         <Button fx:id="back" layoutX="78.0" layoutY="227.0" mnemonicParsing="false" onAction="#toWelcome" prefHeight="40.0" prefWidth="118.0" text="Back " />
                     </children></AnchorPane>
-                <AnchorPane prefHeight="417.0" prefWidth="710.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <children>
-                        <Button fx:id="addPhotos" defaultButton="true" layoutX="268.0" layoutY="14.0" onAction="#addPhotos" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #E96151;" text="Add Photos" />
-                    </children>
-                </AnchorPane>
             </children>
         </GridPane>
     </children>

@@ -16,10 +16,9 @@
             <rowConstraints>
                 <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="564.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="122.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <AnchorPane prefHeight="676.0" prefWidth="311.0" style="-fx-background-color: #192a56;" GridPane.rowSpan="3">
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="676.0" prefWidth="311.0" style="-fx-background-color: #192a56;" GridPane.rowSpan="2">
                     <children>
                         <Button layoutX="78.0" layoutY="81.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="About Us" />
                         <Button layoutX="78.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Help" />
