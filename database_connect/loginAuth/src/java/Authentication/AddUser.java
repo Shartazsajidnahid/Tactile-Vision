@@ -1,9 +1,8 @@
 package com.example.javafxloginformjdbctutorial.Authentication;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
+import static java.lang.Integer.parseInt;
 
 public class AddUser {
 
@@ -40,7 +39,7 @@ public class AddUser {
         }
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
-            preparedStatement.setString(1, "1");
+            preparedStatement.setString(1, getlastid(type));
             preparedStatement.setString(2, fullName);
             preparedStatement.setString(3, password);
             preparedStatement.setString(4, emailId);
@@ -58,6 +57,28 @@ public class AddUser {
         }
     }
 
+    public String getlastid(String tablename){
+        String id = "-1";
+        try {
+            Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+            String query = "select * from ";
+            query+= tablename;
+
+            Statement sta = connection.createStatement();
+            ResultSet x = sta.executeQuery(query);
+            while(x.next()){
+                id = x.getString(1);
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        Integer Cid = parseInt(id);
+        if(id =="-1") return null;
+        Cid++;
+        return Integer.toString(Cid);
+    }
 
 
 }
