@@ -1,4 +1,4 @@
-import org.opencv.core.Core;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,7 +9,6 @@ public class ImageReadWrite {
     public void ImageRead2(){
         BufferedImage image=null;
         try {
-            System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
             File input = new File("imageSaved.jpg");
             image = ImageIO.read(input);
             for(int i=0;i<image.getWidth();i++){
