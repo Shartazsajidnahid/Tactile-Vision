@@ -10,11 +10,10 @@ public class JdbcDao {
     private static final String DATABASE_PASSWORD = "Kakashi";
     private static final String INSERT_QUERY = "INSERT INTO students(studentID,name,email,password) VALUES (?, ?, ?,?)";
     private static final String RETRIEVE_QUERY = "select * from students";
-    private static final String SELECT_QUERY = "SELECT * FROM students WHERE email = ? and password = ?";
+    private static final String SELECT_QUERY = "SELECT * FROM students WHERE name = ? and password = ?";
 
 
     public void insertRecord(String fullName, String emailId, String password) throws SQLException {
-
         // Step 1: Establishing a Connection and
         // try-with-resource statement will auto close the connection.
         try (Connection connection = DriverManager
@@ -34,8 +33,9 @@ public class JdbcDao {
             // print SQL exception information
             printSQLException(e);
         }
-        retrive();
     }
+
+
     private static void retrive() {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -53,7 +53,6 @@ public class JdbcDao {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-
     }
     private static int getlastid(){
         int id = -1;
@@ -67,7 +66,6 @@ public class JdbcDao {
             while(x.next()){
                 id = x.getInt(1);
             }
-
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -103,7 +101,6 @@ public class JdbcDao {
         // Step 1: Establishing a Connection and
         // try-with-resource statement will auto close the connection.
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY)) {
             preparedStatement.setString(1, emailId);
@@ -115,8 +112,6 @@ public class JdbcDao {
             if (resultSet.next()) {
                 return true;
             }
-
-
         } catch (SQLException e) {
             // print SQL exception information
             printSQLException(e);
