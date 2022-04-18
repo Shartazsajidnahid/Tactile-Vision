@@ -26,7 +26,7 @@
                     </children></AnchorPane>
             <AnchorPane prefHeight="417.0" prefWidth="710.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="toLogin" defaultButton="true" layoutX="244.0" layoutY="244.0" onAction="#loadLogin" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: #E96151;" text="Have an account?  Log In" />
+                  <Button fx:id="toLogin" defaultButton="true" layoutX="228.0" layoutY="179.0" onAction="#loadLogin" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: #E96151;" text="Have an account?  Log In" />
                </children>
             </AnchorPane>
             </children>
