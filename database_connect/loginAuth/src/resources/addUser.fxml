@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+
+<AnchorPane prefHeight="609.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.AddUserControl">
+   <children>
+      <VBox layoutX="700.0" layoutY="1.0" prefHeight="609.0" prefWidth="111.0">
+         <children>
+            <Text fx:id="naem" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: BOLD; -fx-font-size: 15;" text="Admin" wrappingWidth="81.13671875">
+               <VBox.margin>
+                  <Insets left="100.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.13671875">
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+      <ComboBox fx:id="typeSelector" layoutX="401.0" layoutY="120.0" onAction="#selectType" prefWidth="150.0" promptText="User TYpe" />
+      <Label layoutX="330.0" layoutY="125.0" prefHeight="17.0" prefWidth="60.0" text="Select First" />
+      <Label layoutX="273.0" layoutY="186.0" text="UserID : " />
+      <Label layoutX="258.0" layoutY="239.0" text="Password : " />
+      <Button fx:id="submitButton" defaultButton="true" layoutX="433.0" layoutY="520.0" onAction="#setrollbatchVisible" prefHeight="40" prefWidth="100" style="-fx-background-color: #E96151;" text="Add User" textFill="WHITE" />
+      <TextField fx:id="fullNameField" layoutX="331.0" layoutY="174.0" prefHeight="40" prefWidth="303.0" />
+      <PasswordField fx:id="passwordField" layoutX="331.0" layoutY="227.0" prefHeight="40" prefWidth="303.0" />
+      <Label layoutX="277.0" layoutY="293.0" text="Email :" />
+      <TextField fx:id="emailField" layoutX="331.0" layoutY="281.0" prefHeight="40" prefWidth="303.0" />
+      <Label layoutX="273.0" layoutY="348.0" text="Phone :" />
+      <TextField fx:id="phoneField" layoutX="331.0" layoutY="336.0" prefHeight="40" prefWidth="303.0" />
+      <AnchorPane fx:id="rollAndbatchInput" layoutX="261.0" layoutY="388.0" prefHeight="71.0" prefWidth="401.0" visible="false">
+         <children>
+            <Label layoutX="23.0" layoutY="19.0" text="Roll :" />
+            <TextField fx:id="rollField" layoutX="71.0" layoutY="7.0" prefHeight="40" prefWidth="120.0" />
+            <Label layoutX="218.0" layoutY="19.0" text="Batch :" />
+            <TextField fx:id="batchField" layoutX="261.0" layoutY="7.0" prefHeight="40" prefWidth="113.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
