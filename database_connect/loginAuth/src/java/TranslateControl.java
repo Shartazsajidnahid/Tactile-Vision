@@ -79,27 +79,8 @@ public class TranslateControl {
         });
 
     }
-    private void showImage(String name) throws MalformedURLException {
-        Stage primaryStage = (Stage)(everything.getScene().getWindow());
-        final Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(primaryStage);
-        VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("This is a Dialog"));
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
-        stage.setScene(dialogScene);
-        ImageView imageView = new ImageView();
-        File file = new File(name);
-        String imagepath = file.toURI().toURL().toString();
-        System.out.println("file:"+imagepath);
-        Image image = new Image(imagepath);
-        imageView.setImage(image);
-        Group root = new Group(imageView);
-        Scene scene = new Scene(root);
-        stage.setTitle("Displaying Image");
-        stage.setScene(scene);
-        stage.show();
-    }
+
+    private ObservableList<String> selectednamelist;
 
     public void addPhotos() throws MalformedURLException {
 
@@ -119,14 +100,12 @@ public class TranslateControl {
             for(File file: fileList){
                 ImageView imageView = new ImageView();
                 String imagepath = file.toURI().toURL().toString();
-               // System.out.println(file.getName());
-                //addDynamicButton(file.getName());
-//                buttons.add(new Button(file.getAbsolutePath()));
+
                 names.add(file.getAbsolutePath());
             }
-            ObservableList<String> namelist = FXCollections.observableArrayList(names);
+            selectednamelist = FXCollections.observableArrayList(names);
 
-            addDynamicButton(namelist);
+            addDynamicButton(selectednamelist);
          }
     }
 

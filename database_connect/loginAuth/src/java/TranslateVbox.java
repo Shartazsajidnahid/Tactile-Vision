@@ -36,9 +36,13 @@ public class TranslateVbox {
 
     @FXML
     public ListView inputImageList;
+    @FXML
+    public ListView outputImageList;
 
     @FXML
     public ImageView showImage;
+
+    ObservableList<String> namelist;
 
     public void addDynamicButton(ObservableList<String> names){
 
@@ -82,28 +86,21 @@ public class TranslateVbox {
 
     public void addPhotos() throws MalformedURLException {
         System.out.println("hey");
-//        Stage primaryStage = (Stage)(everything.getScene().getWindow());
-//        final Stage stage = new Stage();
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initOwner(primaryStage);
-//
+
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         // Stage stage = (Stage)(everything.getScene().getWindow());
         List<File> fileList =  fileChooser.showOpenMultipleDialog(stage);
 
         ArrayList<String> Selectednames = new ArrayList<>();
-        if (fileList != null) {
 
+        if (fileList != null) {
             for(File file: fileList){
                 ImageView imageView = new ImageView();
                 String imagepath = file.toURI().toURL().toString();
-                // System.out.println(file.getName());
-                //addDynamicButton(file.getName());
-//                buttons.add(new Button(file.getAbsolutePath()));
                 Selectednames.add(file.getAbsolutePath());
             }
-            ObservableList<String> namelist = FXCollections.observableArrayList(Selectednames);
+            namelist = FXCollections.observableArrayList(Selectednames);
             addDynamicButton(namelist);
         }
     }
