@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="everything" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.WelcomeVboxControl">
+<VBox fx:id="everything" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.AdminControl">
    <children>
-      <HBox prefHeight="100.0" prefWidth="952.0" style="-fx-background-color: #192a56;">
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #192a56;">
          <children>
             <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="About Us">
                <HBox.margin>
@@ -26,13 +26,31 @@
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
             </Button>
-            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="189.13671875">
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#Logout" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: B22222; -fx-font-weight: BOLD;" text="Log Out" textFill="WHITE">
                <HBox.margin>
-                  <Insets left="250.0" top="10.0" />
+                  <Insets left="450.0" top="32.5" />
                </HBox.margin>
-            </Text>
+            </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="inside" prefHeight="609.0" />
+      <AnchorPane fx:id="insidebody" prefHeight="609.0">
+         <children>
+            <VBox layoutX="700.0" layoutY="1.0" prefHeight="609.0" prefWidth="111.0">
+               <children>
+                  <Text fx:id="naem" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: BOLD; -fx-font-size: 15;" text="Logged in as Student" textAlignment="CENTER" wrappingWidth="155.13671875">
+                     <VBox.margin>
+                        <Insets left="55.0" top="10.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.13671875">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+            <Button layoutX="389.0" layoutY="201.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #192a56; -fx-font-weight: BOLD;" text="View Marks" textFill="WHITE" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

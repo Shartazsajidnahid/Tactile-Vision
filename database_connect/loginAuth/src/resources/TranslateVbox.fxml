@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox fx:id="everything" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.TranslateVbox">
    <children>
@@ -41,9 +43,24 @@
       </HBox>
       <AnchorPane fx:id="inside" prefHeight="609.0">
          <children>
-            <ListView fx:id="inputImageList" prefHeight="609.0" prefWidth="214.0" />
-            <ListView fx:id="inputImageList1" layoutX="737.0" layoutY="1.0" prefHeight="609.0" prefWidth="214.0" />
-            <ImageView fx:id="showImage" fitHeight="610.0" fitWidth="520.0" layoutX="215.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+            <ListView fx:id="inputImageList" layoutY="28.0" prefHeight="582.0" prefWidth="214.0" />
+            <ListView fx:id="outputImageList" layoutX="737.0" layoutY="28.0" prefHeight="582.0" prefWidth="214.0" />
+            <ImageView fx:id="showImage" fitHeight="582.0" fitWidth="520.0" layoutX="215.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INPUT Images">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="782.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Converted Images">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="422.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageView">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

@@ -37,9 +37,9 @@
          <children>
             <VBox layoutX="700.0" layoutY="1.0" prefHeight="609.0" prefWidth="111.0">
                <children>
-                  <Text fx:id="naem" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: BOLD; -fx-font-size: 15;" text="Admin" wrappingWidth="81.13671875">
+                  <Text fx:id="naem" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: BOLD; -fx-font-size: 15;" text="Logged in as Admin" textAlignment="CENTER" wrappingWidth="155.13671875">
                      <VBox.margin>
-                        <Insets left="100.0" top="10.0" />
+                        <Insets left="55.0" top="10.0" />
                      </VBox.margin>
                   </Text>
                   <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250.13671875">
@@ -49,7 +49,9 @@
                   </Text>
                </children>
             </VBox>
-            <Button layoutX="389.0" layoutY="201.0" mnemonicParsing="false" onAction="#toaddUser" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #192a56; -fx-font-weight: BOLD;" text="Add Student" textFill="WHITE" />
+            <Button layoutX="389.0" layoutY="157.0" mnemonicParsing="false" onAction="#toaddUser" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #192a56; -fx-font-weight: BOLD;" text="Add User" textFill="WHITE" />
+            <Button layoutX="389.0" layoutY="242.0" mnemonicParsing="false" onAction="#toaddUser" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #192a56; -fx-font-weight: BOLD;" text="Edit User" textFill="WHITE" />
+            <Button layoutX="389.0" layoutY="321.0" mnemonicParsing="false" onAction="#toaddUser" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #192a56; -fx-font-weight: BOLD;" text="Manage Course" textFill="WHITE" />
          </children>
         </AnchorPane>
     </children>
