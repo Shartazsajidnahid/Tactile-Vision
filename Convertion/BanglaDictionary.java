@@ -23,12 +23,12 @@ public class BanglaDictionary {
             entry("অ", ""), entry("আ", "া"), entry("ই", "ি"), entry("ঈ", "ী"),
             entry("উ", "ু"), entry("ঊ", "ূ"), entry("এ", "ে"), entry("ঐ", "ৈ"),
             entry("ও", "ো"), entry("ঔ", "ৌ"), entry("ঋ", "ৃ")
-
     );
 
     Map<String, String> vowel = Map.ofEntries(
             entry("100000", "অ"), entry("001110", "আ"), entry("001010", "ঈ"), entry("110011", "ঊ"),
-            entry("000010111010", "ঋ"), entry("100010", "এ"), entry("001100", "ঐ"), entry("010101", "ঔ")
+            entry("000010111010", "ঋ"), entry("100010", "এ"), entry("001100", "ঐ"), entry("010101", "ঔ"),
+            entry("010100", "ই"), entry("101001", "উ"),    entry("101010", "ও")
     );
     Map<String, String> numbers = Map.ofEntries(
             entry("010110", "০"), entry("100000", "১"), entry("110000", "২"), entry("100100", "৩"),
@@ -40,6 +40,7 @@ public class BanglaDictionary {
             entry("কষময", "ক্ষ্ম্য"), entry("নতরয", "ন্ত্র্য")
 
     );
+
     Map<String, String> special_vowel = Map.ofEntries(
             entry("010100", "ই"), entry("101001", "উ"),    entry("101010", "ও")
     );
