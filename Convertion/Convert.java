@@ -1,7 +1,7 @@
 package Mapper;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 import java.util.Vector;
 
 import static java.util.Map.entry;
@@ -9,9 +9,11 @@ import static java.util.Map.entry;
 
 public class Convert {
     Vector<String> rooms = new Vector<>() {{
-        add("100000");
-        add("101000");
-        add("011111");
+        add("000100");
+        add("100110");
+        add("110000");
+        add("010100");
+        add("011110");
         add("space");
         add("111010");
         add("001110");
@@ -57,31 +59,44 @@ public class Convert {
     private List<String> jointLetters = new ArrayList<>();
     private BanglaDictionary BD = new BanglaDictionary();
 
-    public void translate(){
+    public void translate(List<String> binfile){
         List<String> word = new ArrayList<String>();
         List<String> bangla_sentence = new ArrayList<String>();
 
-        for (String x : rooms) {
-            if(x=="space"){                         //take one word before space and translate
+        for (String x : binfile) {
+//             System.out.println(x.length());
+            if(x.equals("\n")){
                 bangla_sentence.add(convert(word));
                 word = new ArrayList<>();
-                continue;
+                bangla_sentence.add("\n");
             }
-            word.add(x);
+
+            else if(x.equals("space")){                         //take one word before space and translate
+                bangla_sentence.add(convert(word));
+                word = new ArrayList<>();
+//                for (String xy: word){
+//                    System.out.print(xy + " : ");
+//                }
+//                System.out.println(convert(word));
+
+            }
+            else word.add(x);
         }
+
         bangla_sentence.add(convert(word));
-        for (String x : bangla_sentence) {
-            System.out.println(x);
-        }
+
+        String line = String.join(" ", bangla_sentence);
+        System.out.println(line);
     }
 
     public String convert(List<String> word){
         String bangla = "";
         firstletter = true;
         for (String x : word) {
+
             bangla += map_value(x);
             if(firstletter == true) firstletter = false;
-//            System.out.println("bangla: " + bangla);
+            System.out.println(x + " : " + bangla);
         }
 
         return bangla;
@@ -90,17 +105,18 @@ public class Convert {
     private String map_value(String braille){
         String bangla = "";
 
-        if(braille == "000100"){ // 2 joint letter
+        if(braille.equals("000100")){ // 2 joint letter
+            System.out.println( "two joint ");
             twoletterConjunct = true;
         }
-        else if(braille == "000101"){
+        else if(braille.equals("000101") ){
             three_four_letterConjunct = true;
         }
         else if(BD.vowel.containsKey(braille)){
-            return calc_vowel(braille);
+            bangla =  calc_vowel(braille);
         }
         else if(BD.consonant.containsKey(braille)){
-            return calc_consonant(braille);
+            bangla =  calc_consonant(braille);
         }
 
         return bangla;
@@ -157,13 +173,13 @@ public class Convert {
     }
 
     private String calc_vowel(String braille_vowel){
+        if(firstletter) return BD.vowel.get(braille_vowel);
         if(BD.special_vowel.containsKey(braille_vowel) && notSymbol){  //if special vowel and if no অ before
             notSymbol = false;
            return BD.vowel.get(braille_vowel);
         }
 
         else if(braille_vowel == "100000"){  //if found অ
-            if(firstletter) return BD.vowel.get(braille_vowel);
             notSymbol = true;
             return "";
         }
