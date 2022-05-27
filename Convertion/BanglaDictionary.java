@@ -45,5 +45,40 @@ public class BanglaDictionary {
             entry("010100", "ই"), entry("101001", "উ"),    entry("101010", "ও")
     );
 
+    Map<String, String> punctation = Map.ofEntries(
+            entry("001001", "-"), entry("010011", "|"), entry("000001011001", "\\‘"), entry("001011001000", "\\’"),
+            entry("000001011011", "["), entry("011000", ";"), entry("011010", "!"), entry("000011011011", "="),
+            entry("001010001010", "*"), entry("011011001000", "]"), entry("010010", ":"), entry("001011", "\""),
+            entry("011001", "“"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
+    );
 
+    Map<String, String> Operator = Map.ofEntries(
+            entry("001001", "-"), entry("000011011011", "="), entry("001010001010", "*"), entry("001110", ">"), entry("110001", "<"),
+            entry("010000", "."), entry("001100", "/"), entry("011011", "("), entry("001101", "+"), entry("100101", "%"),
+            entry("000110", "^"), entry("011011001000", "]"), entry("000001011011", "["), entry("101010011011", ">="),
+            entry("010101011011", "<="), entry("001000", ",")
+    );
+
+    Map<String, String> math_operator = Map.ofEntries(
+            entry("011010", "+"), entry("001001", "-"), entry("011001", "x"), entry("010011", "%"), entry("001000","."), //multiplication dot
+        entry("011011", "=")
+    );
+
+    Map<String, String> hosonto = Map.ofEntries(
+            entry("011001", "?"), entry("011011", ")"), entry("001011", "্")
+    );
+
+    Map<String, String> dot = Map.ofEntries(
+            entry("010000", ".")
+    );
+
+    Map<String, String> twelveDots = Map.ofEntries(
+            entry("000011011011", "="), entry("001010001010", "*"), entry("000001011011", "["), entry("000001011001", "‘"),
+            entry("001011001000", "’"),
+            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ"), entry("000010011110", "ৎ")
+    );
+
+    Map<String, String> double_mapping = Map.ofEntries(
+            entry("011001", "?"), entry("001011", "\""), entry("011011", "("), entry("010000", ",")
+    );
 }
