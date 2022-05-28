@@ -1,5 +1,6 @@
 package Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
@@ -37,7 +38,6 @@ public class BanglaDictionary {
 
     Map<String, String> fourletters = Map.ofEntries(
             entry("কষময", "ক্ষ্ম্য"), entry("নতরয", "ন্ত্র্য")
-
     );
 
     Map<String, String> special_vowel = Map.ofEntries(
@@ -60,7 +60,7 @@ public class BanglaDictionary {
 
     Map<String, String> math_operator = Map.ofEntries(
             entry("011010", "+"), entry("001001", "-"), entry("011001", "x"), entry("010011", "%"), entry("001000","."), //multiplication dot
-        entry("011011", "=")
+            entry("011011", "=")
     );
 
     Map<String, String> hosonto = Map.ofEntries(
@@ -77,6 +77,11 @@ public class BanglaDictionary {
             entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ")
     );
 
+    Map<String, String> twelveDotPrefix = Map.ofEntries(
+            entry("000001", "ঃ"), entry("001010", "ঈ"), entry("000011", "ং"),
+            entry("011011", "("), entry("001011", "\"")
+    );
+
     Map<String, String> double_mapping = Map.ofEntries(
             entry("011001", "?"), entry("001011", "\""), entry("011011", "("), entry("010000", ",")
     );
@@ -84,6 +89,10 @@ public class BanglaDictionary {
 
     public String getNumberPrefix() {
         return numberPrefix;
+    }
+
+    public Map<String, String> getTwelveDotPrefix() {
+        return twelveDotPrefix;
     }
 
     public Map<String, String> getConsonant() {

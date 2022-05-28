@@ -12,7 +12,7 @@ public class ReadfromFile {
     public List<String> read() throws IOException {
         List<String> listOfStrings  = new ArrayList<String>();
 
-        BufferedReader bf = new BufferedReader(new java.io.FileReader("data_07_bin.txt"));
+        BufferedReader bf = new BufferedReader(new java.io.FileReader("data_01_bin.txt"));
 
         // read entire line as string
         String line = bf.readLine();
@@ -32,9 +32,9 @@ public class ReadfromFile {
         for (String str : array) {
             String[] rooms = str.split(" ");
             for (String s : rooms) {
-               // System.out.println(s);
+                // System.out.println(s);
                 binfile.add(s);
-               // System.out.println("hey");
+                // System.out.println("hey");
             }
             binfile.add("\n");
 //            System.out.println("Nahid");
