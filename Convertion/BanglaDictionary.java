@@ -6,7 +6,6 @@ import static java.util.Map.entry;
 
 public class BanglaDictionary {
 
-
     Map<String, String> consonant = Map.ofEntries(
             entry("101000", "ক"), entry("101101", "খ"), entry("110110", "গ"), entry("110001", "ঘ"),
             entry("001101", "ঙ"),entry("100100", "চ"), entry("100001", "ছ"), entry("010110", "জ"),
@@ -46,7 +45,7 @@ public class BanglaDictionary {
     );
 
     Map<String, String> punctation = Map.ofEntries(
-            entry("001001", "-"), entry("010011", "|"), entry("000001011001", "\\‘"), entry("001011001000", "\\’"),
+            entry("001001", "-"), entry("010011", "|"), entry("000001011001", "‘"), entry("001011001000", "’"),
             entry("000001011011", "["), entry("011000", ";"), entry("011010", "!"), entry("000011011011", "="),
             entry("001010001010", "*"), entry("011011001000", "]"), entry("010010", ":"), entry("001011", "\""),
             entry("011001", "“"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
@@ -75,10 +74,67 @@ public class BanglaDictionary {
     Map<String, String> twelveDots = Map.ofEntries(
             entry("000011011011", "="), entry("001010001010", "*"), entry("000001011011", "["), entry("000001011001", "‘"),
             entry("001011001000", "’"),
-            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ"), entry("000010011110", "ৎ")
+            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ")
     );
 
     Map<String, String> double_mapping = Map.ofEntries(
             entry("011001", "?"), entry("001011", "\""), entry("011011", "("), entry("010000", ",")
     );
+    private String numberPrefix = "001111";
+
+    public String getNumberPrefix() {
+        return numberPrefix;
+    }
+
+    public Map<String, String> getConsonant() {
+        return consonant;
+    }
+
+    public Map<String, String> getSymbols() {
+        return symbols;
+    }
+
+    public Map<String, String> getVowel() {
+        return vowel;
+    }
+
+    public Map<String, String> getNumbers() {
+        return numbers;
+    }
+
+    public Map<String, String> getFourletters() {
+        return fourletters;
+    }
+
+    public Map<String, String> getSpecial_vowel() {
+        return special_vowel;
+    }
+
+    public Map<String, String> getPunctation() {
+        return punctation;
+    }
+
+    public Map<String, String> getOperator() {
+        return Operator;
+    }
+
+    public Map<String, String> getMath_operator() {
+        return math_operator;
+    }
+
+    public Map<String, String> getHosonto() {
+        return hosonto;
+    }
+
+    public Map<String, String> getDot() {
+        return dot;
+    }
+
+    public Map<String, String> getTwelveDots() {
+        return twelveDots;
+    }
+
+    public Map<String, String> getDouble_mapping() {
+        return double_mapping;
+    }
 }

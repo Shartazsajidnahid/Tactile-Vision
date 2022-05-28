@@ -52,10 +52,9 @@ public class Convert {
         add("101111");
     }};
 
-    private boolean notSymbol = false;
-    private boolean firstletter = true;
-    private boolean twoletterConjunct = false;
-    private boolean three_four_letterConjunct = false;
+    private boolean notSymbol = false, SymbolBefore = false;
+    private boolean firstletter = true, twoletterConjunct = false,  three_four_letterConjunct = false;
+    private boolean numberpref = false;
     private List<String> jointLetters = new ArrayList<>();
     private BanglaDictionary BD = new BanglaDictionary();
 
@@ -78,7 +77,7 @@ public class Convert {
 //                    System.out.print(xy + " : ");
 //                }
 //                System.out.println(convert(word));
-
+                numberpref = false;
             }
             else word.add(x);
         }
@@ -93,7 +92,6 @@ public class Convert {
         String bangla = "";
         firstletter = true;
         for (String x : word) {
-
             bangla += map_value(x);
             if(firstletter == true) firstletter = false;
             System.out.println(x + " : " + bangla);
@@ -105,12 +103,18 @@ public class Convert {
     private String map_value(String braille){
         String bangla = "";
 
-        if(braille.equals("000100")){ // 2 joint letter
+        if(numberpref) {
+            bangla = handleNumbers(braille);
+        }
+        else if(braille.equals("000100")){ // 2 joint letter
             System.out.println( "two joint ");
             twoletterConjunct = true;
         }
-        else if(braille.equals("000101") ){
+        else if(braille.equals("000101") ){ // 3 4 joint letter
             three_four_letterConjunct = true;
+        }
+        else if(braille.equals(BD.getNumberPrefix())){
+            bangla = handleNumberPrefix();
         }
         else if(BD.vowel.containsKey(braille)){
             bangla =  calc_vowel(braille);
@@ -119,7 +123,33 @@ public class Convert {
             bangla =  calc_consonant(braille);
         }
 
+
+
+        if(!BD.vowel.containsKey(braille)){  //
+            SymbolBefore = false;
+        }
         return bangla;
+    }
+
+    private String handleNumbers(String braille) {
+
+        if(BD.getNumbers().containsKey(braille)){
+            return BD.getNumbers().get(braille);
+        }
+        else if(BD.getMath_operator().containsKey(braille)){
+            return BD.getMath_operator().get(braille);
+        }
+        return "";
+    }
+
+    private String handleNumberPrefix() {
+
+        if(firstletter){
+
+            numberpref = true;
+            return "";
+        }
+        else return BD.consonant.get(BD.getNumberPrefix());
     }
 
 
@@ -131,7 +161,6 @@ public class Convert {
         if(three_four_letterConjunct){
             return calc_three_four_joint(braille_cons);
         }
-
         return BD.consonant.get(braille_cons);
     }
 
@@ -178,11 +207,15 @@ public class Convert {
             notSymbol = false;
            return BD.vowel.get(braille_vowel);
         }
+        else if(SymbolBefore){
+            return BD.vowel.get(braille_vowel);
+        }
 
         else if(braille_vowel == "100000"){  //if found অ
             notSymbol = true;
             return "";
         }
+        SymbolBefore = true;
         return BD.symbols.get(BD.vowel.get(braille_vowel));
     }
 }
