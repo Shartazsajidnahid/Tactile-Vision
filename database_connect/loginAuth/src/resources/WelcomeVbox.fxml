@@ -5,32 +5,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="everything" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.WelcomeVboxControl">
+
+<VBox fx:id="everything" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1030.0" prefWidth="1442.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.WelcomeVboxControl">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #192a56;">
+      <HBox prefHeight="816.0" prefWidth="1302.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0"  text="About Us">
+            <VBox prefHeight="816.0" prefWidth="640.0" style="-fx-background-color: #192a56;">
+               <children>
+                  <Button fx:id="trasnslate" mnemonicParsing="false" onAction="#toTranslate" prefHeight="70.0" prefWidth="195.0" text="Translate">
+                     <VBox.margin>
+                        <Insets left="190.0" right="30.0" top="260.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="196.0" text="Help">
+                     <VBox.margin>
+                        <Insets left="190.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="73.0" prefWidth="198.0" text="About Us">
+                     <VBox.margin>
+                        <Insets left="190.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <AnchorPane fx:id="inside" prefHeight="816.0" prefWidth="604.0" style="-fx-background-color: #DEE4E7;" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="toLogin" defaultButton="true" layoutX="255.0" layoutY="368.0" onAction="#loadLogin" prefHeight="40.0" prefWidth="151.0" style="-fx-background-color: #E96151;" text="Have an account?  Log In" AnchorPane.rightAnchor="255.0" />
+               </children>
                <HBox.margin>
-                  <Insets left="20.0" top="27.0" />
+                  <Insets />
                </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Help">
-               <HBox.margin>
-                  <Insets left="20.0" top="27.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="trasnslate" mnemonicParsing="false" onAction="#toTranslate" prefHeight="40.0" prefWidth="118.0" text="Translate">
-               <HBox.margin>
-                  <Insets left="20.0" top="27.0" />
-               </HBox.margin>
-            </Button>
+            </AnchorPane>
          </children>
       </HBox>
-      <AnchorPane fx:id="inside" prefHeight="609.0">
-         <children>
-            <Button fx:id="toLogin" defaultButton="true"  onAction="#loadLogin" layoutX="374.0" layoutY="252.0" prefHeight="40.0" prefWidth="151.0" style="-fx-background-color: #E96151;" text="Have an account?  Log In" />
-         </children>
-      </AnchorPane>
    </children>
 </VBox>

@@ -11,60 +11,77 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="everything" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="837.0" prefWidth="1385.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.TranslateVbox">
+<VBox fx:id="everything" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1030.0" prefWidth="1442.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxloginformjdbctutorial.Controllers.TranslateVbox">
    <children>
-      <HBox prefHeight="100.0" prefWidth="1368.0" style="-fx-background-color: #192a56;">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="114.0" prefWidth="1442.0" style="-fx-background-color: #192a56;">
          <children>
             <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="About Us">
                <HBox.margin>
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Segoe UI Semibold Italic" size="12.0" />
+               </font>
             </Button>
             <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Help">
                <HBox.margin>
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button fx:id="tohome" mnemonicParsing="false" onAction="#toWelcome" prefHeight="40.0" prefWidth="118.0" text="Home">
                <HBox.margin>
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button fx:id="addPhotos" defaultButton="true" onAction="#addPhotos" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #E96151;" text="Add Photos" textFill="WHITE">
                <HBox.margin>
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button fx:id="addPhotos1" defaultButton="true" onAction="#addPhotos" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: #E96151;" text="Convert" textFill="WHITE">
                <HBox.margin>
                   <Insets left="20.0" top="27.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="inside" prefHeight="609.0" prefWidth="952.0" style="-fx-background-color: cyan;" VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="inside" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="609.0" prefWidth="952.0" style="-fx-background-color: #DEE4E7;" VBox.vgrow="ALWAYS">
          <children>
-            <ListView fx:id="inputImageList" layoutY="28.0" prefHeight="582.0" prefWidth="228.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="27.0" />
-            <ListView fx:id="outputImageList" layoutX="737.0" layoutY="28.0" prefHeight="728.0" prefWidth="228.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
-            <ImageView fx:id="showImage" fitHeight="702.0" fitWidth="894.0" layoutX="229.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="27.0">
+            <ListView fx:id="inputImageList" layoutY="28.0" prefHeight="710.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="27.0" />
+            <ListView fx:id="outputImageList" layoutX="1157.0" layoutY="27.0" prefHeight="710.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+            <ImageView fx:id="showImage" fitHeight="710.0" fitWidth="927.0" layoutX="441.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="441.0" AnchorPane.rightAnchor="441.91845703125" AnchorPane.topAnchor="27.0">
                <image>
-                  <Image url="@../../../../../../../Downloads/Wallpapers/5521267.jpg" />
+                  <Image url="@../../../../../../../Yellow/Scan%20Copy/10.jpeg" />
                </image></ImageView>
-            <Text layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INPUT Images">
+            <Text layoutX="118.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INPUT Images" AnchorPane.bottomAnchor="712.2353515625" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="1166.84130859375" AnchorPane.topAnchor="4.8134765625">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Text layoutX="782.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Converted Images" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0">
+            <Text layoutX="1153.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Converted Images" AnchorPane.rightAnchor="104.236328125" AnchorPane.topAnchor="3.8134765625">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Text layoutX="422.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageView" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="300.0">
+            <Text layoutX="634.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ImageView" AnchorPane.leftAnchor="634.0" AnchorPane.rightAnchor="672.689453125">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
+            <Button fx:id="tohome1" layoutX="1016.0" layoutY="59.0" mnemonicParsing="false" onAction="#toWelcome" prefHeight="40.0" prefWidth="118.0" text="Save as jpg" AnchorPane.rightAnchor="372.0" />
+            <Button fx:id="tohome2" layoutX="1016.0" layoutY="122.0" mnemonicParsing="false" onAction="#toWelcome" prefHeight="40.0" prefWidth="118.0" text="Save as text" AnchorPane.rightAnchor="372.0" />
          </children>
       </AnchorPane>
    </children>
