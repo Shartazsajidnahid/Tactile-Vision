@@ -71,12 +71,24 @@ public class dotIdentifier {
                 }
             }
         }
-//        for(int i=0;i<lineList.size();i++){
-//            System.out.print(lineList.get(i)+ " " );
-//        }
+        int flag=0;
+        for(int i=0;i<lineList.size();i++){
+            if(lineList.get(i).equals("000000")){
+                if(flag==0){
+                    lineList.set(i,"space");
+                    flag=1;
+                }
+                else{
+                    lineList.remove(i);
+                }
+            }else{
+                flag=0;
+            }
+        }
+
         Convert objC= new Convert();
 //        objC.translate(lineList);
-        System.out.println("আ");
+
         ImageIO.write(imageToSave , "png", new File("outputImage3.png"));
 
     }
