@@ -11,7 +11,7 @@ public class ImageRead {
     public BufferedImage ImageRead2(){
         BufferedImage image=null;
         try {
-            File input = new File("edit399.png");
+            File input = new File("edit32.png");
             image = ImageIO.read(input);
             BufferedImage image1= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
             image1.getGraphics().drawImage(image, 0, 0, null);

@@ -38,15 +38,15 @@ public class dotIdentifier {
         int width= image.getWidth();
         int blueP= 0xFF0000FF;
         int dCount=0;
-        for(int j=0;j<height;j++){
-            for(int i=0;i<width;i++){
+        for(int j=79;j<height-130;j++){
+            for(int i=195;i<width-79;i++){
                 if(j>=image.getHeight()) break;
                 int flag=0;
                 if(image2.getRGB(i,j)<=0xFFAAAAAA){
                     image2.setRGB(i,j,0xFF00FF00);
 
                     ArrayList<List> d=new ArrayList<>(floodFill(i,j,image2));
-                    if(d.size()>=25) {
+                    if(d.size()>=11) {
 
                         dCount++;
                         ArrayList<Integer> centers= new ArrayList<>(findDotCenter(d));
@@ -54,10 +54,10 @@ public class dotIdentifier {
                         int dotCenterY=centers.get(1);
                         ArrayList<Object> countForValidity= countValidity(dotCenterX,dotCenterY,imageToSave);
                         ArrayList<Integer> dd=(ArrayList<Integer>) countForValidity.get(0);
-//                        if(dd.get(0)<2){
-//                            j=j+15;
-//                            continue;
-//                        }
+                        if(dd.get(0)<2){
+                            j=j+15;
+                            continue;
+                        }
 
                         ArrayList<Integer> retCount=charFind(dotCenterX,dotCenterY);
 //                        if(retCount==null)j=j+10;
@@ -71,9 +71,15 @@ public class dotIdentifier {
                 }
             }
         }
+//        for(int i=0;i<lineList.size();i++){
+//            System.out.print(lineList.get(i)+" ");
+//        }
+//        System.out.println("--------------------------------------------------------------");
         int flag=0;
+        int countS=0;
         for(int i=0;i<lineList.size();i++){
-            if(lineList.get(i).equals("000000")){
+            if(lineList.get(i).equals("000000")==true){
+                countS++;
                 if(flag==0){
                     lineList.set(i,"space");
                     flag=1;
@@ -81,15 +87,27 @@ public class dotIdentifier {
                 else{
                     lineList.remove(i);
                 }
-            }else{
+            }
+            else{
                 flag=0;
             }
         }
-
+        int countSpace=0;
+        for(int i=0;i<lineList.size();i++){
+            if(lineList.get(i).equals("000000")){
+               lineList.remove(i);
+               i--;
+            }
+        }
+//        System.out.println(countSpace);
+//        System.out.println(countS);
+        for(int i=0;i<lineList.size();i++){
+            System.out.print(lineList.get(i)+" ");
+        }
         Convert objC= new Convert();
 //        objC.translate(lineList);
 
-        ImageIO.write(imageToSave , "png", new File("outputImage3.png"));
+        ImageIO.write(imageToSave , "png", new File("outputImage3new.png"));
 
     }
     ArrayList<List> floodFill(int x11,int y11,BufferedImage image2) {
@@ -229,10 +247,10 @@ public class dotIdentifier {
             }
         }
         ArrayList<Integer> trueCount=readLine(realCenterX,realCenterY,1);
-        System.out.println(count1.get(0)+" "+count1.get(1));
-        System.out.println(count2.get(0)+" "+count2.get(1));
+//        System.out.println(count1.get(0)+" "+count1.get(1));
+//        System.out.println(count2.get(0)+" "+count2.get(1));
 
-        System.out.println("\n");
+//        System.out.println("\n");
         return trueCount;
 
     }
@@ -281,7 +299,8 @@ public class dotIdentifier {
         ArrayList<Integer> counts=new ArrayList<>();
         counts.add(dotCount);
         counts.add(charCount);
-        lineList.add("\n");
+        if(lineList.isEmpty()==false)
+            lineList.add("\n");
         return counts;
     }
     void updateBottomMargin2(int y){
@@ -393,8 +412,8 @@ public class dotIdentifier {
     ArrayList<Integer> searchArea(int x, int y, BufferedImage image4) throws IOException {
 //        BufferedImage image4= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
 //        image4.getGraphics().drawImage(image, 0, 0, null);
-        for(int i=-9;i<=9;i++){
-            for(int j=-9;j<=9;j++){
+        for(int i=-12;i<=12;i++){
+            for(int j=-12;j<=12;j++){
 
                 int x1=x+i;
                 int y1=y+j;
@@ -403,7 +422,7 @@ public class dotIdentifier {
                 if(image4.getRGB(x1,y1)<0xFFAAAAAA){
                     ArrayList<List> aList=new ArrayList<>(floodFill(x1,y1,image4));
 
-                    if(aList.size()>=25){
+                    if(aList.size()>=11){
                         for(int k=0;k<aList.size();k++){
                             imageToSave.setRGB((int)aList.get(k).get(0),(int)aList.get(k).get(1),0xFFFF0000);
                         }

@@ -93,6 +93,7 @@ public class Convert {
     public String convert(List<String> word){
         String bangla = "";
         firstletter = true;
+
         for (String x : word) {
             bangla += map_value(x);
             if(firstletter == true) firstletter = false;
