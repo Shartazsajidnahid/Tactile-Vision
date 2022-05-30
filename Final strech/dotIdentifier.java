@@ -1,3 +1,5 @@
+import Mapper.Convert;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -44,20 +46,38 @@ public class dotIdentifier {
                     image2.setRGB(i,j,0xFF00FF00);
 
                     ArrayList<List> d=new ArrayList<>(floodFill(i,j,image2));
-                    if(d.size()>=19) {
+                    if(d.size()>=25) {
 
                         dCount++;
                         ArrayList<Integer> centers= new ArrayList<>(findDotCenter(d));
                         int dotCenterX=centers.get(0);
                         int dotCenterY=centers.get(1);
-                        charFind(dotCenterX,dotCenterY);
+                        ArrayList<Object> countForValidity= countValidity(dotCenterX,dotCenterY,imageToSave);
+                        ArrayList<Integer> dd=(ArrayList<Integer>) countForValidity.get(0);
+//                        if(dd.get(0)<2){
+//                            j=j+15;
+//                            continue;
+//                        }
+
+                        ArrayList<Integer> retCount=charFind(dotCenterX,dotCenterY);
+//                        if(retCount==null)j=j+10;
+//                        else if(retCount.get(0)<5 || retCount.get(1)<2){
+//                            j=j+20;
+//                        }
+//                        else j=Math.max(bottomMargin+10,j+10);
                         j=j+120;
 
                     }
                 }
             }
         }
-        ImageIO.write(imageToSave , "png", new File("outputImage2.png"));
+//        for(int i=0;i<lineList.size();i++){
+//            System.out.print(lineList.get(i)+ " " );
+//        }
+        Convert objC= new Convert();
+//        objC.translate(lineList);
+        System.out.println("আ");
+        ImageIO.write(imageToSave , "png", new File("outputImage3.png"));
 
     }
     ArrayList<List> floodFill(int x11,int y11,BufferedImage image2) {
@@ -150,7 +170,7 @@ public class dotIdentifier {
     ArrayList<Integer> possibleCenters(int x1, int y1){
         return new ArrayList<>();
     }
-    void charFind(int x1, int y1) throws IOException {
+    ArrayList<Integer> charFind(int x1, int y1) throws IOException {
 
         BufferedImage image3= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         image3.getGraphics().drawImage(image, 0, 0, null);
@@ -164,34 +184,55 @@ public class dotIdentifier {
         int cnt2=0;
         int realCenterX=cx2;
         int realCenterY=cy2;
-//        ArrayList<Integer> returnedList=new ArrayList<>((ArrayList<Integer>)countValidity(cx1,cy1).get(0));
-//        cnt1=returnedList.get(0);
-////        realCenterX=returnedList.get(1);
-////        realCenterY=returnedList.get(2);
-//        returnedList=new ArrayList<>((ArrayList<Integer>)countValidity(cx2,cy2).get(0));
-//        cnt2=returnedList.get(0);
-//        if(cnt1<cnt2){
-////            realCenterX=returnedList.get(1);
-////            realCenterY=returnedList.get(2);
-//            realCenterX=cx2;
-//            realCenterY=cy2;
-//        }
+
         currCenterX=realCenterX;
         currCenterY=realCenterY;
-        int count=readLine(realCenterX,realCenterY);
-        System.out.println(count);
+        ArrayList<Integer> count1=readLine(cx1,cy1,0);
+        ArrayList<Integer> count2=readLine(cx2,cy2,0);
+        if(count1.get(0)<5 || count2.get(0)<5)return null;
+        if(count1.get(0)>count2.get(0)){
+            currCenterX=cx1;
+            realCenterX=cx1;
+            currCenterY=cy1;
+            realCenterY=cy1;
+        }
+        else if(count1.get(0)<count2.get(0)){
+            currCenterX=cx2;
+            realCenterX=cx2;
+            currCenterY=cy2;
+            realCenterY=cy2;
+        }
+        else{
+            if(count1.get(1)<count2.get(1)){
+                currCenterX=cx1;
+                realCenterX=cx1;
+                currCenterY=cy1;
+                realCenterY=cy1;
+            }
+            else{
+                currCenterX=cx2;
+                realCenterX=cx2;
+                currCenterY=cy2;
+                realCenterY=cy2;
+            }
+        }
+        ArrayList<Integer> trueCount=readLine(realCenterX,realCenterY,1);
+        System.out.println(count1.get(0)+" "+count1.get(1));
+        System.out.println(count2.get(0)+" "+count2.get(1));
+
         System.out.println("\n");
+        return trueCount;
 
     }
-    int readLine(int cx,int cy) throws IOException {
-
-        lineList=new ArrayList<>();
+    ArrayList<Integer> readLine(int cx,int cy, int flag) throws IOException {
+        BufferedImage image3= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+        image3.getGraphics().drawImage(image, 0, 0, null);
         int nx=cx;
         int ny=cy;
         int mul=0;
         ArrayList<String> line=new ArrayList<>();
         ArrayList<Integer> returnedList;
-        int count1=0;
+        int charCount=0;
         String retString= new String();
         while(cx-mul*cd>=0){
             nx=cx-mul*cd;
@@ -199,28 +240,42 @@ public class dotIdentifier {
         }
         cx=nx;
         mul=0;
+        int dotCount=0;
+
         while(cx+cd<image.getWidth()){
-            for(int i=-5;i<5;i++){
-                for(int j=-5;j<5;j++){
-                    if(cx+i<0 || cy+j>=imageToSave.getHeight() || cx+j>=imageToSave.getWidth())continue;
-                    imageToSave.setRGB(cx+i,cy+j,0xFF00FF00);
+            if(flag==1){
+                for(int i=-5;i<5;i++){
+                    for(int j=-5;j<5;j++){
+                        if(cx+i<0 || cy+j>=imageToSave.getHeight() || cx+j>=imageToSave.getWidth())continue;
+                        imageToSave.setRGB(cx+i,cy+j,0xFF00FF00);
+                    }
                 }
             }
             nx=cx+cd;
-            ArrayList<Object> obj= countValidity(nx,cy);
+            ArrayList<Object> obj= countValidity(nx,cy,image3);
             retString= (String)obj.get(1);
             ArrayList<Integer> obj1=(ArrayList<Integer>) obj.get(0);
             int xx= obj1.get(1);
             int yy= obj1.get(2);
             cx=xx;
-            if(retString.indexOf("1",0)!=-1)count1++;
-//            line.add(retString);
+            cy=yy;
+            dotCount+=(obj1.get(0)-1);
+            if(retString.indexOf("1",0)!=-1)charCount++;
+            if(flag==1){
+                lineList.add(new String(retString));
+            }
             mul++;
         }
-
-        return count1;
+        ArrayList<Integer> counts=new ArrayList<>();
+        counts.add(dotCount);
+        counts.add(charCount);
+        lineList.add("\n");
+        return counts;
     }
-    ArrayList<Object> countValidity(int xCoordinate, int yCoordinate) throws IOException {
+    void updateBottomMargin2(int y){
+        if(y>bottomMargin)bottomMargin=y;
+    }
+    ArrayList<Object> countValidity(int xCoordinate, int yCoordinate, BufferedImage image3) throws IOException {
         int x1=xCoordinate-dx/2;
         int y1=yCoordinate-dy;
         int x2=xCoordinate-dx/2;
@@ -233,8 +288,8 @@ public class dotIdentifier {
         int y5=yCoordinate;
         int x6=xCoordinate+dx/2;
         int y6=yCoordinate+dy;
-        BufferedImage image3= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
-        image3.getGraphics().drawImage(image, 0, 0, null);
+//        BufferedImage image3= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+//        image3.getGraphics().drawImage(image, 0, 0, null);
         int cnt1=1;
         ArrayList<List> dotCenters= new ArrayList<>();
         int dCX;
@@ -249,6 +304,7 @@ public class dotIdentifier {
         int currX=xCoordinate;
         int currY=yCoordinate;
         if(centers!=null){
+            updateBottomMargin2(y1);
             currX+=(centers.get(0)+dx/2);
             currY+=(centers.get(1)+dy);
             cnt1++;
@@ -258,6 +314,7 @@ public class dotIdentifier {
         }
         centers=searchArea(x2,y2,image3);
         if(centers!=null){
+            updateBottomMargin2(y2);
             currX+=(centers.get(0)+dx/2);
             currY+=(centers.get(1));
             cnt1++;
@@ -267,6 +324,7 @@ public class dotIdentifier {
         }
         centers=searchArea(x3,y3,image3);
         if(centers!=null){
+            updateBottomMargin2(y3);
             currX+=(centers.get(0)+dx/2);
             currY+=(centers.get(1)-dy);
             cnt1++;
@@ -276,6 +334,7 @@ public class dotIdentifier {
         }
         centers=searchArea(x4,y4,image3);
         if(centers!=null){
+            updateBottomMargin2(y4);
             currX+=(centers.get(0)-dx/2);
             currY+=(centers.get(1)+dy);
             cnt1++;
@@ -285,6 +344,7 @@ public class dotIdentifier {
         }
         centers=searchArea(x5,y5,image3);
         if(centers!=null){
+            updateBottomMargin2(y5);
             currX+=(centers.get(0)-dx/2);
             currY+=(centers.get(1));
             cnt1++;
@@ -294,6 +354,7 @@ public class dotIdentifier {
         }
         centers=searchArea(x6,y6,image3);
         if(centers!=null){
+            updateBottomMargin2(y6);
             currX+=(centers.get(0)-dx/2);
             currY+=(centers.get(1)-dy);
             cnt1++;
@@ -301,9 +362,9 @@ public class dotIdentifier {
         }else{
             s=s.concat(cero);
         }
-        if(cnt1!=0){
-            currX/=cnt1;
-            currY/=cnt1;
+        if(cnt1!=0) {
+            currX /= cnt1;
+            currY /= cnt1;
         }
 //        System.out.println(currX+" "+currY + " "+ cnt1);
 //        System.out.println("----------------");
@@ -311,31 +372,30 @@ public class dotIdentifier {
         retList.add(cnt1);
         retList.add(currX);
         retList.add(currY);
-        System.out.print(s+" ");
+//        System.out.print(s+" ");
         ArrayList<Object>ret=new ArrayList<>();
         ret.add(retList);
         ret.add(s);
         return ret;
     }
-    ArrayList<Integer> searchArea(int x, int y, BufferedImage image3) throws IOException {
-        BufferedImage image4= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
-        image4.getGraphics().drawImage(image, 0, 0, null);
-        for(int i=-11;i<=11;i++){
-            for(int j=-11;j<=11;j++){
+    ArrayList<Integer> searchArea(int x, int y, BufferedImage image4) throws IOException {
+//        BufferedImage image4= new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+//        image4.getGraphics().drawImage(image, 0, 0, null);
+        for(int i=-9;i<=9;i++){
+            for(int j=-9;j<=9;j++){
 
                 int x1=x+i;
                 int y1=y+j;
                 if(x1<0 || y1<0 || x1>=image.getWidth() || y1>=image.getHeight())continue;
-                image4.setRGB(x1,y1,0xFF00FF00);
 
-                if(image3.getRGB(x1,y1)<0xFFAAAAAA){
-                    ArrayList<List> aList=new ArrayList<>(floodFill(x1,y1,image3));
+                if(image4.getRGB(x1,y1)<0xFFAAAAAA){
+                    ArrayList<List> aList=new ArrayList<>(floodFill(x1,y1,image4));
 
-                    if(aList.size()>=19){
+                    if(aList.size()>=25){
                         for(int k=0;k<aList.size();k++){
                             imageToSave.setRGB((int)aList.get(k).get(0),(int)aList.get(k).get(1),0xFFFF0000);
                         }
-                        bottomMarginUpdate(aList);
+//                        bottomMarginUpdate(aList);
                         ArrayList<Integer> centers=new ArrayList<>(findDotCenter(aList));
 
                         return centers;
