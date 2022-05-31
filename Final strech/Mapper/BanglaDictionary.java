@@ -48,7 +48,7 @@ public class BanglaDictionary {
             entry("001001", "-"), entry("010011", "|"), entry("000001011001", "‘"), entry("001011001000", "’"),
             entry("000001011011", "["), entry("011000", ";"), entry("011010", "!"), entry("000011011011", "="),
             entry("001010001010", "*"), entry("011011001000", "]"), entry("010010", ":"), entry("001011", "\""),
-            entry("011001", "“"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
+            entry("011001", "?"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
     );
 
     Map<String, String> Operator = Map.ofEntries(
@@ -72,9 +72,9 @@ public class BanglaDictionary {
     );
 
     Map<String, String> twelveDots = Map.ofEntries(
-            entry("000011011011", "="), entry("001010001010", "*"), entry("000001011011", "["), entry("000010011001", "‘"),
+            entry("000011011011", "="), entry("001010001010", "*"), entry("000001011011", "["), entry("000001011001", "‘"),
             entry("001011001000", "’"),
-            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ")
+            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("000010011110", "ৎ")
     );
 
     Map<String, String> twelveDotPrefix = Map.ofEntries(
@@ -93,7 +93,7 @@ public class BanglaDictionary {
             entry("100110", "4"), entry("100010", "5"),
             entry("110100", "6"), entry("110110", "7"),
             entry("110010", "8"), entry("010100", "9")
-            );
+    );
 
     Map<String, String> english_alphabet = Map.ofEntries(entry("100000", "a"), entry("110000", "b"), entry("100100", "c"), entry("100110", "d"), entry("100010", "e"),
             entry("110100", "f"), entry("110110", "g"), entry("110010", "h"), entry("010100", "i"), entry("010110", "j"),
@@ -176,4 +176,5 @@ public class BanglaDictionary {
     public Map<String, String> getDouble_mapping() {
         return double_mapping;
     }
+
 }

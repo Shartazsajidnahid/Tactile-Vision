@@ -14,7 +14,6 @@ public class ReadfromFile {
 
         BufferedReader bf = new BufferedReader(new java.io.FileReader("data_02.txt"));
 
-
         // read entire line as string
         String line = bf.readLine();
 
@@ -33,9 +32,9 @@ public class ReadfromFile {
         for (String str : array) {
             String[] rooms = str.split(" ");
             for (String s : rooms) {
-                // System.out.println(s);
+               // System.out.println(s);
                 binfile.add(s);
-                // System.out.println("hey");
+               // System.out.println("hey");
             }
             binfile.add("\n");
 //            System.out.println("Nahid");

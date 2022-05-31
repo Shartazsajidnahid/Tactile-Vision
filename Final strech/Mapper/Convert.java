@@ -9,8 +9,8 @@ import static java.util.Map.entry;
 
 public class Convert {
 
-    private boolean notSymbol = false, SymbolBefore = false;
     private boolean thirdBracket = false, firstBracket = false;
+    private boolean curlyApostrophy = false;
 
     private Mapper.BanglaDictionary BD = new Mapper.BanglaDictionary();
     private int index = 0;
@@ -52,34 +52,127 @@ public class Convert {
         if (braille.equals(BD.getEnglishPrefix()) && (index == 0)) {
             return handleEnglish();
         }
-//        else if(BD.getTwelveDotPrefix().containsKey(braille)){
-//            bangla = handleTwelveDotPrefix(braille);
-//        }
-        else if (braille.equals("000100") ) { // 2 joint letter
-            return twoJointLetter();
+        else if(BD.getTwelveDotPrefix().containsKey(braille)){
+            bangla = handleTwelveDotPrefix(braille);
         }
-         else if(braille.equals("000101") ){ // 3 4 joint letter
-            return threeJointLetter();
-        }
-         else if(braille.equals(BD.getNumberPrefix()) && (index == 0)){
-             return handleBanglaNumbers(braille);
-        }
-        else if(BD.vowel.containsKey(braille)){
-            bangla =  calc_vowel(braille);
-        }
-        else if(BD.consonant.containsKey(braille)){
-            bangla =  calc_consonant(braille);
-        }
-        else if(BD.getPunctation().containsKey(braille)){
-            bangla = BD.getPunctation().get(braille);
-        }
-        else if(BD.getOperator().containsKey(braille)){
-            bangla = BD.getOperator().get(braille);
+        else{
+            bangla = checkpost2(braille);
         }
 
-        if(!BD.vowel.containsKey(braille)){
-            SymbolBefore = false;
+
+        return bangla;
+    }
+
+    private String checkpost2(String braille){
+         if (braille.equals("000100") ) { // 2 joint letter
+            return twoJointLetter();
         }
+        else if(braille.equals("000101") ){ // 3 4 joint letter
+            return threeJointLetter();
+        }
+        else if(braille.equals(BD.getNumberPrefix()) && (index == 0)){
+            return handleBanglaNumbers(braille);
+        }
+        else if(BD.vowel.containsKey(braille)){
+            return calc_vowel(braille);
+        }
+        else if(BD.consonant.containsKey(braille)){
+            return calc_consonant(braille);
+        }
+        else if(BD.getPunctation().containsKey(braille)){
+            return BD.getPunctation().get(braille);
+        }
+        else if(BD.getOperator().containsKey(braille)){
+            return BD.getOperator().get(braille);
+        }
+        return "";
+    }
+
+    private String handleTwelveDotPrefix(String braille) {
+        String bangla = checkpost2(braille);
+        String first6 = braille, second6="";
+
+        if(index+1<word.size()){ //check if the prefix is last letter
+            second6 = word.get(index+1);
+        }
+        else {
+            return checkpost2(braille);
+        }
+
+        System.out.println("hi 12 : " + first6 + " " + second6);
+        if(!BD.getTwelveDots().containsKey(first6+second6)){ // check if total 12 dots have a meaningful map or not
+            return bangla;
+        }
+
+        if(first6.equals("000001")){
+            if(index==word.size()-1){
+                bangla = BD.getConsonant().get(first6);
+            }
+            else{
+                if(second6.equals("011001")){
+                    curlyApostrophy = true;
+                }
+                else if(second6.equals("011011")){
+                    thirdBracket = true;
+                }
+                index++;
+                return BD.getTwelveDots().get(first6+second6);
+            }
+        }
+        else if(first6.equals("001011")){
+            if(curlyApostrophy){
+                curlyApostrophy = false;
+                index++;
+                return BD.getTwelveDots().get(first6+second6);
+            }
+            else{
+                return BD.getPunctation().get(first6);
+            }
+        }
+        else if(first6.equals("000011")){
+            if(index==0){
+                index++;
+                return BD.getTwelveDots().get(first6+second6);
+            }
+            else{
+                return BD.getConsonant().get(first6);
+            }
+        }
+        else if(first6.equals("001010")){
+            if(word.size()==1){
+                index++;
+                return BD.getTwelveDots().get(first6+second6);
+            }
+            else{
+                return calc_vowel(first6);
+            }
+        }
+        else if(first6.equals("011011")){
+            if(thirdBracket){
+                thirdBracket = false;
+                index++;
+                return BD.getTwelveDots().get(first6+second6);
+            }
+            else{
+                if(firstBracket){
+                    firstBracket = false;
+                    return ")";
+                }
+                else return "(";
+
+            }
+        }
+        else if(first6.equals("000010")){
+            if(word.size()==1){
+                return BD.getPunctation().get(first6);
+            }
+            else{
+                index++;
+                System.out.println("wow" + first6+second6);
+                return BD.getTwelveDots().get(first6+second6);
+            }
+        }
+
         return bangla;
     }
 
@@ -166,58 +259,15 @@ public class Convert {
     private String calc_consonant(String braille_cons){
         String bangla = "";
         if(BD.getConsonant().containsKey(braille_cons)){
-            return BD.consonant.get(braille_cons);
+            bangla =  BD.getConsonant().get(braille_cons);
+        }
+        if(braille_cons.equals("010010") && (index==word.size()-1)){  //if ঞ found at last
+            bangla = BD.getPunctation().get(braille_cons);
         }
         return bangla;
     }
 
 
-//    private String handleTwelveDots(String braille) {
-//        String bangla = "";
-//        System.out.println("hey i am 123" + twelveletterFirstPart);
-//        twelveletterFirstPart+=braille;
-//        bangla = BD.getTwelveDots().get(twelveletterFirstPart);
-//
-//        //if( bangla.equals("[") ) thirdBracket = true;
-//        return  bangla;
-//    }
-//
-//    private String handleTwelveDotPrefix(String braille) {
-//        String bangla = "";
-//        if(braille.equals("010000")){
-//            twelveletterFirstPart = braille;
-//            twelveletterPrefix = true;
-//            return bangla;
-//        }
-//        else if(braille.equals("000001") || braille.equals("000011") || braille.equals("001011")){
-//            if(firstletter){
-//                twelveletterFirstPart = braille;
-//                twelveletterPrefix = true;
-//                return bangla;
-//            }
-//            else{
-//                return BD.getTwelveDotPrefix().get(braille);
-//            }
-//        }
-//        else if(braille.equals("001010")){
-//            return calc_vowel(braille);
-//        }
-//        else if(braille.equals("011011")){
-//            if(thirdBracket){
-//                twelveletterFirstPart = braille;
-//                twelveletterPrefix = true;
-//                thirdBracket = false;
-//                return bangla;
-//            }
-//            else{
-//                return firstBracketEquals(braille);
-//            }
-//
-//        }
-//        System.out.println("hey 12prefix" + twelveletterFirstPart);
-//        return bangla;
-//    }
-//
 //    private String firstBracketEquals(String braille) {
 //        if(firstBracket){
 //            return ")";
