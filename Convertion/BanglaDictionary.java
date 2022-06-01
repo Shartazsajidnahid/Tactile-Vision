@@ -1,6 +1,5 @@
 package Mapper;
 
-import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
@@ -16,7 +15,7 @@ public class BanglaDictionary {
             entry("111100", "প"), entry("110100", "ফ"), entry("110000", "ব"), entry("111001", "ভ"), entry("101100", "ম"),
             entry("101111", "য"), entry("111010", "র"), entry("111000", "ল"),
             entry("100101", "শ"), entry("011100", "স"), entry("111101", "ষ"), entry("110010", "হ"), entry("111110", "ক্ষ"),
-            entry("100011", "জ্ঞ"), entry("110111", "ড়"), entry("111011", "ঢ়"), entry("010001", "য়"), entry("010000011110", "ৎ"),
+            entry("100011", "জ্ঞ"), entry("110111", "ড়"), entry("111011", "ঢ়"), entry("010001", "য়"), entry("000010011110", "ৎ"),
             entry("000100", "্‌"), entry("000011", "ং"), entry("000001", "ঃ"), entry("001000", "ঁ")
     );
     Map<String, String> symbols = Map.ofEntries(
@@ -48,7 +47,7 @@ public class BanglaDictionary {
             entry("001001", "-"), entry("010011", "|"), entry("000001011001", "‘"), entry("001011001000", "’"),
             entry("000001011011", "["), entry("011000", ";"), entry("011010", "!"), entry("000011011011", "="),
             entry("001010001010", "*"), entry("011011001000", "]"), entry("010010", ":"), entry("001011", "\""),
-            entry("011001", "“"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
+            entry("011001", "?"), entry("011011", "("),  entry("010000", ","), entry("001100", "/"), entry("000010", "$")
     );
 
     Map<String, String> Operator = Map.ofEntries(
@@ -59,7 +58,7 @@ public class BanglaDictionary {
     );
 
     Map<String, String> math_operator = Map.ofEntries(
-            entry("011010", "+"), entry("001001", "-"), entry("011001", "x"), entry("010011", "%"), entry("001000","."), //multiplication dot
+            entry("011010", "+"), entry("001001", "-"), entry("011001", "x"), entry("010011", "%"), entry("010000","."), //multiplication dot
             entry("011011", "=")
     );
 
@@ -74,18 +73,48 @@ public class BanglaDictionary {
     Map<String, String> twelveDots = Map.ofEntries(
             entry("000011011011", "="), entry("001010001010", "*"), entry("000001011011", "["), entry("000001011001", "‘"),
             entry("001011001000", "’"),
-            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("010000011110", "ৎ")
+            entry("011011001000", "]"), entry("000010111010", "ঋ"), entry("000010011110", "ৎ")
     );
 
     Map<String, String> twelveDotPrefix = Map.ofEntries(
             entry("000001", "ঃ"), entry("001010", "ঈ"), entry("000011", "ং"),
-            entry("011011", "("), entry("001011", "\"")
+            entry("011011", "("), entry("001011", "\""),
+            entry("000010", "")
     );
 
     Map<String, String> double_mapping = Map.ofEntries(
             entry("011001", "?"), entry("001011", "\""), entry("011011", "("), entry("010000", ",")
     );
+
+    Map<String, String> english_numbers = Map.ofEntries(
+            entry("010110", "0"), entry("100000", "1"),
+            entry("110000", "2"), entry("100100", "3"),
+            entry("100110", "4"), entry("100010", "5"),
+            entry("110100", "6"), entry("110110", "7"),
+            entry("110010", "8"), entry("010100", "9")
+    );
+
+    Map<String, String> english_alphabet = Map.ofEntries(entry("100000", "a"), entry("110000", "b"), entry("100100", "c"), entry("100110", "d"), entry("100010", "e"),
+            entry("110100", "f"), entry("110110", "g"), entry("110010", "h"), entry("010100", "i"), entry("010110", "j"),
+            entry("101000", "k"), entry("111000", "l"), entry("101100", "m"), entry("101110", "n"), entry("101010", "o"),
+            entry("101001", "u"), entry("111001", "v"), entry("010111", "w"), entry("101101", "x"), entry("101111", "y"),
+            entry("111100", "p"), entry("111110", "q"), entry("111010", "r"), entry("011100", "s"), entry("011110", "t"),
+            entry("101011", "z")
+    );
     private String numberPrefix = "001111";
+    private String englishPrefix = "000001";
+
+    public Map<String, String> getEnglish_numbers() {
+        return english_numbers;
+    }
+
+    public Map<String, String> getEnglish_alphabet() {
+        return english_alphabet;
+    }
+
+    public String getEnglishPrefix() {
+        return englishPrefix;
+    }
 
     public String getNumberPrefix() {
         return numberPrefix;

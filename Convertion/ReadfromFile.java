@@ -1,10 +1,9 @@
 package Mapper;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.BufferedReader;
 
 
 public class ReadfromFile {
@@ -12,7 +11,7 @@ public class ReadfromFile {
     public List<String> read() throws IOException {
         List<String> listOfStrings  = new ArrayList<String>();
 
-        BufferedReader bf = new BufferedReader(new java.io.FileReader("data_01_bin.txt"));
+        BufferedReader bf = new BufferedReader(new java.io.FileReader("data_02.txt"));
 
         // read entire line as string
         String line = bf.readLine();
