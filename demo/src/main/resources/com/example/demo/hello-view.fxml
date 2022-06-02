@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="everything" maxHeight="864.0" maxWidth="1536.0" minHeight="841.0" prefHeight="841.0" prefWidth="920.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TranslateVbox">
+    <children>
+        <HBox maxHeight="842.0" maxWidth="1536.0" prefHeight="842.0" prefWidth="920.0" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="674.0" prefWidth="461.0" style="-fx-background-color: green;" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Button fx:id="trasnslate" mnemonicParsing="false" prefHeight="53.0" prefWidth="126.0" text="Translate">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="150.0" top="240.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="127.0" text="Help">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="150.0" top="25.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#toWelcome" prefHeight="53.0" prefWidth="127.0" text="About Us">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="150.0" top="25.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="842.0" prefWidth="459.0" style="-fx-background-color: red;" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
