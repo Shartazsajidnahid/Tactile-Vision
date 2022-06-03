@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import DotIdentifier.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -7,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,46 +22,60 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class TranslateVbox {
-
-    @FXML
-    public VBox everything;
+public class TranslateVbox implements Initializable {
 
     @FXML
-    public ListView inputImageList;
-    @FXML
-    public ListView outputImageList;
+    private VBox everything;
 
     @FXML
-    public ImageView showImage;
+    private ListView inputImageList;
+    @FXML
+    private ListView outputImageList;
 
-    ObservableList<String> namelist;
+    @FXML
+    private ImageView showImage;
 
-    public void addDynamicButton(ObservableList<String> names){
+    private ObservableList<String> Inputnamelist;
+    private ObservableList<String> Outputnamelist;
+
+    private List<String> selectedFromInputlist;
+    private App app;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("whatsup");
+        selectedFromInputlist = new ArrayList<>();
+        app = new App();
+    }
+
+    public void addDynamicButton(ObservableList<String> names, ListView listView){
 
         String currentFile ;
-        inputImageList.getItems().addAll(names);
-
-        inputImageList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        listView.getItems().addAll(names);
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
                 try {
-                    showimage((String) inputImageList.getSelectionModel().getSelectedItem());
+                    String filename = (String) listView.getSelectionModel().getSelectedItem();
+                    showimage(filename);
+                    selectedFromInputlist.add(filename);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                //System.out.println( );
             }
         });
-
     }
 
     public void addPhotos() throws MalformedURLException {
@@ -72,20 +88,22 @@ public class TranslateVbox {
 
         if (fileList != null) {
             for(File file: fileList){
-                //ImageView imageView = new ImageView();
                 String imagepath = file.toURI().toURL().toString();
                 Selectednames.add(file.getAbsolutePath());
             }
-            namelist = FXCollections.observableArrayList(Selectednames);
-            addDynamicButton(namelist);
+            Inputnamelist = FXCollections.observableArrayList(Selectednames);
+
+            addDynamicButton(Inputnamelist, inputImageList);
         }
     }
-
     public void showimage(String file) throws FileNotFoundException {
         Image image = new Image(new FileInputStream(file));
         showImage.setImage(image);
     }
-
+    public void showimage2(File file) throws IOException {
+        Image image = new Image(new FileInputStream(file));
+        showImage.setImage(image);
+    }
     public void toWelcome(ActionEvent actionEvent){
         Pane view = null;
         try {
@@ -101,4 +119,15 @@ public class TranslateVbox {
         everything.getChildren().setAll(view);
     }
 
+    public void Convert(ActionEvent actionEvent) throws IOException {
+        for(String x : selectedFromInputlist){
+            Image image = new Image(new FileInputStream(x));
+            app.main(x);
+        }
+    }
+
+    public void save(ActionEvent actionEvent) {
+        Outputnamelist = FXCollections.observableArrayList(selectedFromInputlist);
+        addDynamicButton();
+    }
 }
