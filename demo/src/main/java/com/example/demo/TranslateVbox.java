@@ -13,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -57,6 +58,7 @@ public class TranslateVbox implements Initializable {
         System.out.println("whatsup");
         selectedFromInputlist = new ArrayList<>();
         app = new App();
+        inputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void addDynamicButton(ObservableList<String> names){
