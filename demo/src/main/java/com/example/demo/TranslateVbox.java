@@ -47,8 +47,7 @@ public class TranslateVbox implements Initializable {
     @FXML
     private ImageView showImage;
 
-    private ObservableList<String> Inputnamelist;
-    private ObservableList<String> Outputnamelist;
+    private ObservableList<String> namelist;
 
     private List<String> selectedFromInputlist;
     private App app;
@@ -60,15 +59,15 @@ public class TranslateVbox implements Initializable {
         app = new App();
     }
 
-    public void addDynamicButton(ObservableList<String> names, ListView listView){
+    public void addDynamicButton(ObservableList<String> names){
 
         String currentFile ;
-        listView.getItems().addAll(names);
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        inputImageList.getItems().addAll(names);
+        inputImageList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
                 try {
-                    String filename = (String) listView.getSelectionModel().getSelectedItem();
+                    String filename = (String) inputImageList.getSelectionModel().getSelectedItem();
                     showimage(filename);
                     selectedFromInputlist.add(filename);
                 } catch (FileNotFoundException e) {
@@ -91,9 +90,9 @@ public class TranslateVbox implements Initializable {
                 String imagepath = file.toURI().toURL().toString();
                 Selectednames.add(file.getAbsolutePath());
             }
-            Inputnamelist = FXCollections.observableArrayList(Selectednames);
+            namelist = FXCollections.observableArrayList(Selectednames);
 
-            addDynamicButton(Inputnamelist, inputImageList);
+            addDynamicButton(namelist);
         }
     }
     public void showimage(String file) throws FileNotFoundException {
@@ -124,10 +123,12 @@ public class TranslateVbox implements Initializable {
             Image image = new Image(new FileInputStream(x));
             app.main(x);
         }
+        selectedFromInputlist = new ArrayList<>();
     }
 
-    public void save(ActionEvent actionEvent) {
-        Outputnamelist = FXCollections.observableArrayList(selectedFromInputlist);
-        addDynamicButton();
+    public void save(ActionEvent actionEvent) throws IOException {
+        for(String x : selectedFromInputlist){
+            app.main(x);
+        }
     }
 }
