@@ -38,7 +38,7 @@ public class WelcomeVboxControl {
     }
 
     public void toAdmin(ActionEvent actionEvent) {
-        changePage("Adm_CourseEdit");
+        changePage("AdminPage");
 
     }
 
@@ -56,5 +56,6 @@ public class WelcomeVboxControl {
         FXMLLoader login = new FXMLLoader();
         everything.getChildren().setAll(view);
     }
+
 
 }

@@ -93,7 +93,6 @@ public class TranslateVbox implements Initializable {
                 Selectednames.add(file.getAbsolutePath());
             }
             namelist = FXCollections.observableArrayList(Selectednames);
-
             addDynamicButton(namelist);
         }
     }
