@@ -3,9 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.fxml.Initializable;
 import java.io.IOException;
@@ -20,12 +18,13 @@ import javafx.scene.control.Label;
 
 public class WelcomeVboxControl {
 
+    @FXML
+    private BorderPane LoginPane;
+    @FXML
+    private VBox everything;
 
     @FXML
-    public VBox everything;
-
-    @FXML
-    public AnchorPane inside;
+    private AnchorPane inside;
 
 
     public void loadLogin(ActionEvent actionEvent) throws IOException {
@@ -58,4 +57,15 @@ public class WelcomeVboxControl {
     }
 
 
+    public void tologin(ActionEvent actionEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HelloApplication.class.getResource("Login.fxml"));
+        GridPane child;
+        try {
+            child = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        LoginPane.setCenter(child);
+    }
 }

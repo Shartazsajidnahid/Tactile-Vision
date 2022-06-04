@@ -8,7 +8,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -87,7 +90,7 @@
             </ScrollPane>
          </left>
          <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane fx:id="viewBorderPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <bottom>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1184.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                      <children>
@@ -99,7 +102,7 @@
                               <Insets bottom="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="Save" alignment="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #15221c;" text="Save" textAlignment="JUSTIFY" textFill="WHITE">
+                        <Button fx:id="Save" alignment="CENTER" mnemonicParsing="false"  prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #15221c;" text="Save" textAlignment="JUSTIFY" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Semibold" size="15.0" />
                            </font>
@@ -111,19 +114,29 @@
                   </HBox>
                </bottom>
                <center>
-                  <ScrollPane pannable="true" prefHeight="739.0" prefWidth="480.0" BorderPane.alignment="CENTER">
-                     <content>
-                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                           <children>
-                              <ImageView fx:id="showImage" fitWidth="1030.0" pickOnBounds="true" smooth="false" VBox.vgrow="ALWAYS">
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
+                  <GridPane BorderPane.alignment="CENTER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ScrollPane pannable="true" prefHeight="739.0" prefWidth="480.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                           <content>
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <ImageView fx:id="showImage" fitWidth="1030.0" pickOnBounds="true" smooth="false" VBox.vgrow="ALWAYS">
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </GridPane>
                </center>
             </BorderPane>
          </center>

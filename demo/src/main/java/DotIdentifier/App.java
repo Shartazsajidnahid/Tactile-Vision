@@ -6,9 +6,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class App {
-    public void main(String filename) throws IOException {
+    public List<String> main(String filename) throws IOException {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         DotIdentifier.ImageRead obj= new ImageRead();
         BufferedImage image1= obj.ImageRead2(filename);
@@ -16,7 +17,7 @@ public class App {
 //        image2.getGraphics().drawImage(img1, 0, 0, null);
         image1= new WhiteKnight(245,image1).deployTheKnights();
         dotIdentifier obj2= new dotIdentifier();
-        obj2.findBlackPixel(image1);
+        return obj2.findBlackPixel(image1);
 
 //        ImageIO.write(image1,"png",new File("1s.png"));
 

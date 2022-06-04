@@ -27,7 +27,7 @@ public class dotIdentifier {
     BufferedImage image;
     BufferedImage imageToSave;
 
-    void findBlackPixel(BufferedImage image1) throws IOException {
+    List<String> findBlackPixel(BufferedImage image1) throws IOException {
 
         image= new BufferedImage(image1.getWidth(),image1.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         image.getGraphics().drawImage(image1, 0, 0, null);
@@ -102,13 +102,12 @@ public class dotIdentifier {
         }
 //        System.out.println(countSpace);
 //        System.out.println(countS);
-        for(int i=0;i<lineList.size();i++){
-            System.out.print(lineList.get(i)+" ");
-        }
+//        for(int i=0;i<lineList.size();i++){
+//            System.out.print(lineList.get(i)+" ");
+//        }
         ImageIO.write(imageToSave , "png", new File("yoyo2.png"));
         Convert cv = new Convert();
-        cv.translate(lineList);
-
+        return cv.translate(lineList);
     }
     ArrayList<List> floodFill(int x11,int y11,BufferedImage image2) {
         int x=x11;

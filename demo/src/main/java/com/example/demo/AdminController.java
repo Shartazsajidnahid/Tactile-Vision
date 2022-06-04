@@ -19,32 +19,23 @@ public class AdminController implements Initializable {
     private VBox everything;
     @FXML
     private GridPane centerPane;
-
     @FXML
     private BorderPane mainBorderPane;
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        AddUser addUser = new AddUser();
-//        mainBorderPane.setCenter(addUser);
-//        changePage("AddUser",centerPane);
-//        Parent root = null;
-//        try {
-//            root = FXMLLoader.load(getClass().getResource("Translate.fxml"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        changeCenterPane(mainBorderPane, "AddUser");
+    }
+    private void changeCenterPane(BorderPane pane, String paneName){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(HelloApplication.class.getResource("AddUser.fxml"));
-        GridPane gg;
+        fxmlLoader.setLocation(HelloApplication.class.getResource(paneName+".fxml"));
+        GridPane child;
         try {
-             gg = fxmlLoader.load();
+            child = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        mainBorderPane.setCenter(gg);
+        pane.setCenter(child);
     }
 
 @FXML
@@ -66,4 +57,19 @@ public class AdminController implements Initializable {
         pane.getChildren().setAll(view);
     }
 
+    public void loadAddUser(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "AddUser");
+    }
+
+    public void loadAddCourse(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "AddCourse");
+    }
+
+    public void loadRemoveUser(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "RemoveUser");
+    }
+
+    public void loadRemoveCourse(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "RemoveCourse");
+    }
 }

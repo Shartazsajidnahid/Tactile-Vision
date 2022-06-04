@@ -11,11 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,13 +32,19 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TranslateVbox implements Initializable {
-
+    @FXML
+    private VBox outputVbox;
+    @FXML
+    private ScrollPane scrollpane;
     @FXML
     private VBox everything;
+    @FXML
+    private BorderPane viewBorderPane;
 
     @FXML
     private ListView inputImageList;
@@ -98,12 +104,23 @@ public class TranslateVbox implements Initializable {
     }
     public void showimage(String file) throws FileNotFoundException {
         Image image = new Image(new FileInputStream(file));
-        showImage.setImage(image);
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HelloApplication.class.getResource("Imageview.fxml"));
+        ScrollPane child;
+        try {
+            child = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        viewBorderPane.setCenter(child);
+//        List<String> list1 = Arrays.asList("উন্মুক্ত করা বা খোলা","অভাব আছে এমন ","কোন উপায়ে বেঁচে থাকা ");
+        ViewImage viewImage = fxmlLoader.getController();
+        child.setFitToWidth(true);
+        viewImage.setShowImage(image);
+
     }
-    public void showimage2(File file) throws IOException {
-        Image image = new Image(new FileInputStream(file));
-        showImage.setImage(image);
-    }
+
     public void toWelcome(ActionEvent actionEvent){
         Pane view = null;
         try {
@@ -120,16 +137,53 @@ public class TranslateVbox implements Initializable {
     }
 
     public void Convert(ActionEvent actionEvent) throws IOException {
+        List<String> outputTextList = new ArrayList<>();
         for(String x : selectedFromInputlist){
             Image image = new Image(new FileInputStream(x));
-            app.main(x);
+            outputTextList = app.main(x);
         }
+//        changeCenterPane(viewBorderPane, "outputShow");
+        setOutputVbox(outputTextList);
+//        addLabels(outputTextList);
         selectedFromInputlist = new ArrayList<>();
     }
 
-    public void save(ActionEvent actionEvent) throws IOException {
-        for(String x : selectedFromInputlist){
-            app.main(x);
+    public void setOutputVbox( List<String> list1) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HelloApplication.class.getResource("outputShow.fxml"));
+        ScrollPane child;
+        try {
+            child = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        viewBorderPane.setCenter(child);
+//        List<String> list1 = Arrays.asList("উন্মুক্ত করা বা খোলা","অভাব আছে এমন ","কোন উপায়ে বেঁচে থাকা ");
+        Outputshow outputshowController = fxmlLoader.getController();
+        child.setFitToWidth(true);
+        outputshowController.addLabels(list1);
+    }
+
+
+
+    public void addLabels(List<String> list1){
+        for(String x : list1){
+            Label label = new Label();
+            label.setText(x);
+            // outputVbox.setAlignment(Pos.CENTER);
+            outputVbox.getChildren().add(label);
+        }
+    }
+
+    private void changeCenterPane(BorderPane pane, String paneName){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HelloApplication.class.getResource(paneName+".fxml"));
+        ScrollPane child;
+        try {
+            child = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        pane.setCenter(child);
     }
 }

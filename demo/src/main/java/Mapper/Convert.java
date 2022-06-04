@@ -12,32 +12,43 @@ public class Convert {
     private int index = 0;
     private List<String> word = new ArrayList<String>();
 
-    public void translate(List<String> binfile){
+    public List<String> translate(List<String> binfile){
         List<String> bangla_sentence = new ArrayList<String>();
-
+        List<String> fullsequence = new ArrayList<>();
         for (String x : binfile) {
 //             System.out.println(x.length());
             if(x.equals("\n")){
                 bangla_sentence.add(convert());
                 word = new ArrayList<>();
+                String line = String.join(" ", bangla_sentence);
+
                 bangla_sentence.add("\n");
+                fullsequence.add(line);
+                bangla_sentence = new ArrayList<>();
             }
             else if(x.equals("space")){                         //take one word before space and translate
                 bangla_sentence.add(convert());
+                bangla_sentence.add(" ");
                 word = new ArrayList<>();
             }
             else word.add(x);
         }
         bangla_sentence.add(convert());
         String line = String.join(" ", bangla_sentence);
-        System.out.println(line);
+        fullsequence.add(line);
+//        String line = String.join(" ", bangla_sentence);
+//        System.out.println(line);
+//        for(String x:bangla_sentence){
+//            System.out.print(x);
+//        }
+        return fullsequence;
     }
 
     public String convert(){
         String bangla = "";
         for (index=0; index<word.size(); index++) {
             bangla += map_value(word.get(index));
-            if(index<word.size())System.out.println(word.get(index) + " : " + bangla);
+           // if(index<word.size())System.out.println(word.get(index) + " : " + bangla);
         }
         return bangla;
     }
@@ -97,7 +108,7 @@ public class Convert {
             return checkpost2(braille);
         }
 
-        System.out.println("hi 12 : " + first6 + " " + second6);
+//        System.out.println("hi 12 : " + first6 + " " + second6);
 
 
         if(first6.equals("000001")){
@@ -150,7 +161,7 @@ public class Convert {
                 return BD.getTwelveDots().get(first6+second6);
             }
             else{
-                System.out.println("firstbracket : " + firstBracket);
+//                System.out.println("firstbracket : " + firstBracket);
                 if(firstBracket){
                     firstBracket = false;
                     return ")";
@@ -168,7 +179,7 @@ public class Convert {
             }
             else{
                 index++;
-                System.out.println("wow" + first6+second6);
+//                System.out.println("wow" + first6+second6);
                 if((first6+second6).equals("000010111010")){
                     if(index!=0){
                         return BD.getSymbols().get(BD.getTwelveDots().get(first6+second6));
@@ -188,10 +199,10 @@ public class Convert {
         String bangla = "";
         if (index + 2 < word.size()) {
             if(BD.getConsonant().containsKey(word.get(index+1)) && BD.getConsonant().containsKey(word.get(index+2))){
-                System.out.println("yes + " + word.size()+ " " + index);
+//                System.out.println("yes + " + word.size()+ " " + index);
                 bangla+= BD.getConsonant().get(word.get(index+1)) + "্" + BD.getConsonant().get(word.get(index+2));
                 index+=2;
-                System.out.println("wow " + index + " " + word.get(index-1) + " " + word.get(index));
+//                System.out.println("wow " + index + " " + word.get(index-1) + " " + word.get(index));
             }
             else return bangla;
         }
@@ -230,7 +241,7 @@ public class Convert {
             }
 
             else if (braille.equals("011011")) {
-                System.out.println("firstbracketEnglish : " + firstBracket);
+//                System.out.println("firstbracketEnglish : " + firstBracket);
                 if(firstBracket){
                     firstBracket = false;
 
