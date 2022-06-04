@@ -26,8 +26,4 @@ public class Outputshow {
             outputVbox.getChildren().add(label);
         }
     }
-
-
-
-
 }

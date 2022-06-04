@@ -31,10 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TranslateVbox implements Initializable {
     @FXML
@@ -51,10 +48,15 @@ public class TranslateVbox implements Initializable {
     @FXML
     private ListView outputImageList;
 
+    private HashMap<String, List<String>> ListviewOutput;
+
+
+
     @FXML
     private ImageView showImage;
 
-    private ObservableList<String> namelist;
+    private ObservableList<String> inputnamelist;
+    private ObservableList<String> outputnamelist;
 
     private List<String> selectedFromInputlist;
     private App app;
@@ -68,7 +70,6 @@ public class TranslateVbox implements Initializable {
     }
 
     public void addDynamicButton(ObservableList<String> names){
-
         String currentFile ;
         inputImageList.getItems().addAll(names);
         inputImageList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -77,7 +78,7 @@ public class TranslateVbox implements Initializable {
                 try {
                     String filename = (String) inputImageList.getSelectionModel().getSelectedItem();
                     showimage(filename);
-                    selectedFromInputlist.add(filename);
+                    selectedFromInputlist = inputImageList.getSelectionModel().getSelectedItems();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -98,8 +99,8 @@ public class TranslateVbox implements Initializable {
                 String imagepath = file.toURI().toURL().toString();
                 Selectednames.add(file.getAbsolutePath());
             }
-            namelist = FXCollections.observableArrayList(Selectednames);
-            addDynamicButton(namelist);
+            inputnamelist = FXCollections.observableArrayList(Selectednames);
+            addDynamicButton(inputnamelist);
         }
     }
     public void showimage(String file) throws FileNotFoundException {
@@ -121,31 +122,48 @@ public class TranslateVbox implements Initializable {
 
     }
 
-    public void toWelcome(ActionEvent actionEvent){
-        Pane view = null;
-        try {
-            URL fileUrl = HelloApplication.class.getResource("WelcomeVbox.fxml");
-            if(fileUrl == null){
-                throw new java.io.FileNotFoundException("fxml file not found");
-            }
-            view = new FXMLLoader().load(fileUrl);
-        }catch (Exception e){
-            System.out.println("file not found");
+
+    public void addOuputListview(Map<String,List<String >> listMap){
+        String currentFile ;
+        List<String> selectedNames = new ArrayList<>();
+        for (Map.Entry mapElement : listMap.entrySet()) {
+            selectedNames.add((String)mapElement.getKey());
         }
-        FXMLLoader login = new FXMLLoader();
-        everything.getChildren().setAll(view);
+        outputnamelist = FXCollections.observableArrayList(selectedNames);
+        outputImageList.getItems().addAll(outputnamelist);
+
+        outputImageList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                try {
+                    String filename = (String) outputImageList.getSelectionModel().getSelectedItem();
+                    setOutputVbox(ListviewOutput.get(filename));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     public void Convert(ActionEvent actionEvent) throws IOException {
+        ListviewOutput = new HashMap<>();
+        HashMap<String,List<String>> tempMap = new HashMap<>();
         List<String> outputTextList = new ArrayList<>();
-        for(String x : selectedFromInputlist){
-            Image image = new Image(new FileInputStream(x));
-            outputTextList = app.main(x);
-        }
+        if(!selectedFromInputlist.isEmpty()){
+            for(String x : selectedFromInputlist){
+                Image image = new Image(new FileInputStream(x));
+                outputTextList = app.main(x);
+                tempMap.put(x, outputTextList);
+                ListviewOutput.put(x,outputTextList);
+            }
+            addOuputListview(tempMap);
 //        changeCenterPane(viewBorderPane, "outputShow");
-        setOutputVbox(outputTextList);
+            //setOutputVbox(outputTextList);
 //        addLabels(outputTextList);
-        selectedFromInputlist = new ArrayList<>();
+            selectedFromInputlist = new ArrayList<>();
+        }
     }
 
     public void setOutputVbox( List<String> list1) throws IOException {
@@ -164,17 +182,20 @@ public class TranslateVbox implements Initializable {
         outputshowController.addLabels(list1);
     }
 
-
-
-    public void addLabels(List<String> list1){
-        for(String x : list1){
-            Label label = new Label();
-            label.setText(x);
-            // outputVbox.setAlignment(Pos.CENTER);
-            outputVbox.getChildren().add(label);
+    public void toWelcome(ActionEvent actionEvent){
+        Pane view = null;
+        try {
+            URL fileUrl = HelloApplication.class.getResource("WelcomeVbox.fxml");
+            if(fileUrl == null){
+                throw new java.io.FileNotFoundException("fxml file not found");
+            }
+            view = new FXMLLoader().load(fileUrl);
+        }catch (Exception e){
+            System.out.println("file not found");
         }
+        FXMLLoader login = new FXMLLoader();
+        everything.getChildren().setAll(view);
     }
-
     private void changeCenterPane(BorderPane pane, String paneName){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(HelloApplication.class.getResource(paneName+".fxml"));
