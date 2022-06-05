@@ -101,7 +101,7 @@ public class AddUserControl extends AnchorPane implements Initializable {
 
         if (name.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty() ) {
 
-            dButils.infoBox("Fill up the fields", "Field left blank" , "Sign UP");
+            dButils.infoBox("Fill up the fields", "" , "");
             return;
 
         }
@@ -109,7 +109,7 @@ public class AddUserControl extends AnchorPane implements Initializable {
             String roll = rollField.getText();
             String batch = batchField.getText();
             if (roll.isEmpty() || batch.isEmpty()) {
-                System.out.println( "Please enter your email id");
+                dButils.infoBox("Fill up the fields", "" , "");
                 return;
             }
             this.addUserUtil.addStudent(name,password,email,phone,roll,batch);
@@ -117,7 +117,14 @@ public class AddUserControl extends AnchorPane implements Initializable {
         }
 
         this.addUserUtil.addOtherUsers(name,password,email,phone, this.currentusertype);
+        dButils.infoBox("User added successfully", "" , "");
 
+        fullNameField.clear();
+        passwordField.clear();
+        phoneField.clear();
+        emailField.clear();
+        rollField.clear();
+        batchField.clear();
 
 //        if (feedback=="invalid") {
 //            System.out.println("Please enter correct Email and Password");

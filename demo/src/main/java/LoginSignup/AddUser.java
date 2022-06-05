@@ -16,8 +16,8 @@ public class AddUser {
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "KakashiSharingan9658";
     private static final String INSERT_QUERY_OTHERS_1 = "INSERT INTO ";
-    private static final String INSERT_QUERY_OTHERS_2 = "(ID,fullname,password,email,phone) VALUES (?, ?, ?,?,?)";
-    private static final String INSERT_QUERY_STUDENT= "INSERT INTO student(ID,fullname,password,email,phone,roll,batch) VALUES (?, ?, ?,?,?,?,?)";
+    private static final String INSERT_QUERY_OTHERS_2 = "(fullname,password,email,phone) VALUES ( ?, ?,?,?)";
+    private static final String INSERT_QUERY_STUDENT= "INSERT INTO student(fullname,password,email,phone,roll,batch) VALUES (?, ?,?,?,?,?)";
     private static final String RETRIEVE_QUERY = "select * from students";
     private static final String SELECT_QUERY = "SELECT * FROM students WHERE name = ? and password = ?";
 
@@ -40,15 +40,15 @@ public class AddUser {
         }
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
-            preparedStatement.setString(1, getlastid(type));
-            preparedStatement.setString(2, fullName);
-            preparedStatement.setString(3, password);
-            preparedStatement.setString(4, emailId);
-            preparedStatement.setString(5, phone);
+
+            preparedStatement.setString(1, fullName);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, emailId);
+            preparedStatement.setString(4, phone);
 
             if(type == "student"){
-                preparedStatement.setString(6,roll);
-                preparedStatement.setString(7,batch);
+                preparedStatement.setString(5,roll);
+                preparedStatement.setString(6,batch);
             }
 
             preparedStatement.executeUpdate();
@@ -58,28 +58,7 @@ public class AddUser {
         }
     }
 
-    public String getlastid(String tablename){
-        String id = "-1";
-        try {
-            Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
-            String query = "select * from ";
-            query+= tablename;
-
-            Statement sta = connection.createStatement();
-            ResultSet x = sta.executeQuery(query);
-            while(x.next()){
-                id = x.getString(1);
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        Integer Cid = parseInt(id);
-        if(id =="-1") return null;
-        Cid++;
-        return Integer.toString(Cid);
-    }
 
 
 }

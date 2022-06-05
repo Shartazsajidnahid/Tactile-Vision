@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="centerPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="767.0" prefWidth="645.0" style="-fx-background-color: #D7D7D7;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="centerPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="767.0" prefWidth="645.0" style="-fx-background-color: #D7D7D7;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CourseAddRemove">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -28,12 +28,12 @@
                   <Insets top="100.0" />
                </VBox.margin>
             </HBox>
-            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="48.0" prefWidth="140.0">
+            <TextField fx:id="removeCourseField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="48.0" prefWidth="140.0">
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="addPhotos1" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: Maroon;" text="Remove" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#removeCourse" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: Maroon;" text="Remove" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semibold" size="18.0" />
                </font>
