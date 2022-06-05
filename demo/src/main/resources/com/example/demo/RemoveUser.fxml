@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -29,23 +28,7 @@
                   <Insets top="100.0" />
                </VBox.margin>
                <children>
-                  <HBox prefHeight="40.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label prefHeight="26.0" prefWidth="115.0" text="Select First :">
-                           <HBox.margin>
-                              <Insets left="30.0" top="3.5" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Segoe UI Semilight" size="16.0" />
-                           </font>
-                        </Label>
-                        <ComboBox prefHeight="103.0" prefWidth="150.0">
-                           <HBox.margin>
-                              <Insets bottom="10.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="140.0" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="48.0" prefWidth="140.0">

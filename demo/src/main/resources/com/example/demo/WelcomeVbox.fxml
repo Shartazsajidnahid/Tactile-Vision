@@ -39,7 +39,7 @@
                         </Button>
                     </children>
                 </VBox>
-            <BorderPane fx:id="LoginPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="842.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
+            <BorderPane  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="842.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
                <center>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#tologin" prefHeight="35.0" prefWidth="104.0" style="-fx-background-color: #379c75;" text="Login" textAlignment="JUSTIFY" textFill="WHITE" BorderPane.alignment="CENTER">
                      <font>

@@ -67,6 +67,7 @@ public class TranslateVbox implements Initializable {
         selectedFromInputlist = new ArrayList<>();
         app = new App();
         inputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ListviewOutput = new HashMap<>();
     }
 
     public void addDynamicButton(ObservableList<String> names){
@@ -122,7 +123,6 @@ public class TranslateVbox implements Initializable {
 
     }
 
-
     public void addOuputListview(Map<String,List<String >> listMap){
         String currentFile ;
         List<String> selectedNames = new ArrayList<>();
@@ -148,7 +148,7 @@ public class TranslateVbox implements Initializable {
     }
 
     public void Convert(ActionEvent actionEvent) throws IOException {
-        ListviewOutput = new HashMap<>();
+
         HashMap<String,List<String>> tempMap = new HashMap<>();
         List<String> outputTextList = new ArrayList<>();
         if(!selectedFromInputlist.isEmpty()){
@@ -163,6 +163,7 @@ public class TranslateVbox implements Initializable {
             //setOutputVbox(outputTextList);
 //        addLabels(outputTextList);
             selectedFromInputlist = new ArrayList<>();
+            System.out.println("Map sze : " + ListviewOutput.size());
         }
     }
 
