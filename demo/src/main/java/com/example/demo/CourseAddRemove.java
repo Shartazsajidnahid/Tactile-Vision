@@ -102,8 +102,8 @@ public class CourseAddRemove implements Initializable {
 //        }
         if(courseUserremove.addTeachertoCourse(teacherid, courseid)){
             dButils.infoBox("Teacher added to Course added successfully", "" , "");
-            addStudentField.clear();
-            addCourseField1.clear();
+            addTeacherField.clear();
+            addCourseField2.clear();
         }
     }
 

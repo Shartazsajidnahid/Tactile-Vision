@@ -3,7 +3,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="scrollpane" pannable="true" prefHeight="739.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CourseAddRemove">
+<ScrollPane fx:id="scrollpane" pannable="true" prefHeight="739.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Outputshow">
    <content>
       <VBox fx:id="outputVbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="738.0" prefWidth="478.0" />
    </content>

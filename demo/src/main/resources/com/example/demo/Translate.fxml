@@ -102,7 +102,7 @@
                               <Insets bottom="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="Save" alignment="CENTER" mnemonicParsing="false"  prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #15221c;" text="Save" textAlignment="JUSTIFY" textFill="WHITE">
+                        <Button fx:id="Save" alignment="CENTER" mnemonicParsing="false" onAction="#saveasTxt" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #15221c;" text="Save as txt" textAlignment="JUSTIFY" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Semibold" size="15.0" />
                            </font>

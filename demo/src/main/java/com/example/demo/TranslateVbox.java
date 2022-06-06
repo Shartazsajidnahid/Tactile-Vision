@@ -26,10 +26,7 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -60,6 +57,9 @@ public class TranslateVbox implements Initializable {
     private ObservableList<String> outputnamelist;
 
     private List<String> selectedFromInputlist;
+    private List<String> selectedFromOutputlist;
+
+    private FileChooser fileChooser;
     private App app;
     private CurrentUser currentUser;
 
@@ -67,10 +67,13 @@ public class TranslateVbox implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("whatsup");
         selectedFromInputlist = new ArrayList<>();
+        selectedFromOutputlist = new ArrayList<>();
         app = new App();
         inputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        outputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ListviewOutput = new HashMap<>();
         currentUser = CurrentUser.getInstance();
+        fileChooser = new FileChooser();
     }
 
     public void addDynamicButton(ObservableList<String> names){
@@ -141,6 +144,7 @@ public class TranslateVbox implements Initializable {
                 try {
                     String filename = (String) outputImageList.getSelectionModel().getSelectedItem();
                     setOutputVbox(ListviewOutput.get(filename));
+                    selectedFromOutputlist = outputImageList.getSelectionModel().getSelectedItems();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -169,6 +173,40 @@ public class TranslateVbox implements Initializable {
             System.out.println("Map sze : " + ListviewOutput.size());
         }
     }
+    public void saveasTxt(ActionEvent actionEvent) {
+        HashMap<String,List<String>> tempMap = new HashMap<>();
+        List<String> outputTextList = new ArrayList<>();
+        if(!selectedFromOutputlist.isEmpty()){
+            for(String x : selectedFromOutputlist){
+                List<String> banglaText = ListviewOutput.get(x);
+                toSaveasText(banglaText);
+            }
+            selectedFromOutputlist = new ArrayList<>();
+
+        }
+    }
+
+    private void toSaveasText(List<String> banglaText) {
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
+        fileChooser.setInitialFileName("newfile");
+        File file = fileChooser.showSaveDialog(new Stage());
+
+
+        if(file != null){
+            PrintWriter printWriter = null;
+            try {
+                printWriter = new PrintWriter(file);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            for( String x : banglaText){
+                printWriter.write(x);
+                printWriter.write("\n");
+            }
+            printWriter.close();
+        }
+    }
+
 
     public void setOutputVbox( List<String> list1) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
