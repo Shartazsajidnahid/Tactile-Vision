@@ -43,9 +43,6 @@ public class Login {
         return userDetails;
     }
 
-
-
-
     private boolean validate(String id, String tablename, String password) throws SQLException {
 
         try (Connection connection = getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -56,11 +53,9 @@ public class Login {
             ResultSet resultSet = preparedStatement.executeQuery();
 //            System.out.println("hi");
             if (resultSet.next()) {
-
                 return true;
             }
         } catch (SQLException e) {
-            // print SQL exception information
             this.dbutils.printSQLException(e);
         }
         return false;
