@@ -142,7 +142,7 @@
                </children></VBox>
          </right>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER">
                <children>
                   <GridPane prefHeight="663.0" prefWidth="670.0" VBox.vgrow="ALWAYS">
                     <columnConstraints>
@@ -160,7 +160,7 @@
                                     <Font name="Segoe UI Semilight Italic" size="19.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets left="111.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -178,7 +178,7 @@
                                           <Insets top="10.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button mnemonicParsing="false" onAction="#CheckMark" prefHeight="33.0" prefWidth="79.0" text="Check Mark">
+                                    <Button mnemonicParsing="false" onAction="#CheckMark" prefHeight="33.0" prefWidth="79.0" style="-fx-background-color: #379c75;" text="Check Mark" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="15.0" top="15.0" />
                                        </HBox.margin>

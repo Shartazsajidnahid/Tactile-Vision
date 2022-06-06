@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -56,23 +59,35 @@
                </center>
             </BorderPane>
          </left>
+         <center>
+            <Button fx:id="addPhotos" alignment="CENTER" mnemonicParsing="false" onAction="#addPhotos" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #379c75;" text="Add Photos" textAlignment="JUSTIFY" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semibold" size="15.0" />
+               </font>
+            </Button>
+         </center>
       </BorderPane>
       <BorderPane fx:id="mainBorderPane" prefHeight="759.0" prefWidth="920.0" style="-fx-background-color: #D7D7D7;">
          <left>
             <VBox prefHeight="755.0" prefWidth="250.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="322.0" prefWidth="275.0">
+                  <VBox prefHeight="36.0" prefWidth="250.0">
                      <children>
-                        <Button fx:id="addUser" mnemonicParsing="false" prefHeight="58.0" prefWidth="274.0" style="-fx-background-color: #379c75; -fx-background-radius: 10; -fx-border-color: White; -fx-border-width: 1; -fx-border-radius: 3;" text="Staff" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI Semibold" size="19.0" />
-                           </font>
+                        <Label prefHeight="36.0" prefWidth="85.0" text="Input Images" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets top="50.0" />
+                              <Insets left="90.0" />
                            </VBox.margin>
-                        </Button>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
+                  <ScrollPane prefHeight="692.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <ListView fx:id="outputImageList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="788.0" prefWidth="238.0" style="-fx-background-color: White;" />
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
          </left>
@@ -152,6 +167,43 @@
                   </HBox>
                </children></VBox>
          </right>
+         <center>
+            <BorderPane fx:id="viewBorderPane" prefHeight="755.0" prefWidth="466.0" BorderPane.alignment="CENTER">
+               <bottom>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1184.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="36.0" prefWidth="85.0" text="Student ID :" textAlignment="CENTER">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="studentID" prefHeight="31.0" prefWidth="114.0" />
+                        <Label layoutX="10.0" layoutY="18.0" prefHeight="36.0" prefWidth="85.0" text="CourseID :" textAlignment="CENTER">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="courseID" prefHeight="31.0" prefWidth="114.0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="assignDoc" alignment="CENTER" mnemonicParsing="false" onAction="#assignDoc" prefHeight="31.0" prefWidth="141.0" style="-fx-background-color: #379c75;" text="Assign Document" textAlignment="JUSTIFY" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </center>
       </BorderPane>
    </children>
 </VBox>

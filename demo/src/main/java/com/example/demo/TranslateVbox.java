@@ -47,9 +47,6 @@ public class TranslateVbox implements Initializable {
     private ListView outputImageList;
 
     private HashMap<String, List<String>> ListviewOutput;
-
-
-
     @FXML
     private ImageView showImage;
 
@@ -65,7 +62,6 @@ public class TranslateVbox implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("whatsup");
         selectedFromInputlist = new ArrayList<>();
         selectedFromOutputlist = new ArrayList<>();
         app = new App();
@@ -73,7 +69,8 @@ public class TranslateVbox implements Initializable {
         outputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ListviewOutput = new HashMap<>();
         currentUser = CurrentUser.getInstance();
-        fileChooser = new FileChooser();
+
+
     }
 
     public void addDynamicButton(ObservableList<String> names){
@@ -137,7 +134,6 @@ public class TranslateVbox implements Initializable {
         }
         outputnamelist = FXCollections.observableArrayList(selectedNames);
         outputImageList.getItems().addAll(outputnamelist);
-
         outputImageList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -160,7 +156,7 @@ public class TranslateVbox implements Initializable {
         List<String> outputTextList = new ArrayList<>();
         if(!selectedFromInputlist.isEmpty()){
             for(String x : selectedFromInputlist){
-                Image image = new Image(new FileInputStream(x));
+             //   Image image = new Image(new FileInputStream(x));
                 outputTextList = app.main(x);
                 tempMap.put(x, outputTextList);
                 ListviewOutput.put(x,outputTextList);

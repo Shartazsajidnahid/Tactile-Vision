@@ -77,12 +77,12 @@ public class TeacherControl implements Initializable {
         System.out.println("from Teacher");
         currentUser.toString();
         setuserdetails();
-//
-//        try {
-//            setOutputVbox(list1);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+
+        try {
+            setOutputVbox(list1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     private void setuserdetails() {
         userName.setText(currentUser.getName());
@@ -103,7 +103,7 @@ public class TeacherControl implements Initializable {
         child.setFitToWidth(true);
 //        child.setContent(new Label("nahid"));
         Outputshow outputshowController = fxmlLoader.getController();
-       // outputshowController.addLabels(list1);
+        outputshowController.addLabels(list1);
     }
 
     @FXML
