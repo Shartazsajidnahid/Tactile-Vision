@@ -50,7 +50,7 @@ public class CourseAddRemove implements Initializable {
         }
         if(courseUserremove.removeCourse(coursename)){
             dButils.infoBox("Course removed successfully", "" , "");
-            addCourseField.clear();
+            removeCourseField.clear();
         }
     }
 

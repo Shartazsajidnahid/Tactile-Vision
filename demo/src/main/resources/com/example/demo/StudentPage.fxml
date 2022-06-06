@@ -21,7 +21,7 @@
          <right>
             <BorderPane prefHeight="90.0" prefWidth="227.0" BorderPane.alignment="CENTER">
                <center>
-                  <Button fx:id="addPhotos" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" style="-fx-background-color: #379c75;" text="Translate" textAlignment="JUSTIFY" textFill="WHITE" BorderPane.alignment="CENTER">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#toTranslate" prefHeight="35.0" prefWidth="89.0" style="-fx-background-color: #379c75;" text="Translate" textAlignment="JUSTIFY" textFill="WHITE" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="Segoe UI Semibold" size="15.0" />
                      </font>
@@ -66,7 +66,80 @@
       </BorderPane>
       <BorderPane fx:id="mainBorderPane" prefHeight="759.0" prefWidth="920.0" style="-fx-background-color: #D7D7D7;">
          <right>
-            <VBox prefHeight="755.0" prefWidth="250.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+            <VBox prefHeight="755.0" prefWidth="250.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="49.0" prefWidth="250.0">
+                     <children>
+                        <Label prefHeight="53.0" prefWidth="83.0" text="User type: " HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="50.0" prefWidth="133.0" text="Student" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold Italic" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="49.0" prefWidth="250.0">
+                     <children>
+                        <Label prefHeight="53.0" prefWidth="83.0" text="Name :" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="userName" prefHeight="50.0" prefWidth="169.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold Italic" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="49.0" prefWidth="250.0">
+                     <children>
+                        <Label prefHeight="53.0" prefWidth="83.0" text="Email :" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="email" prefHeight="50.0" prefWidth="169.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold Italic" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="49.0" prefWidth="250.0">
+                     <children>
+                        <Label prefHeight="53.0" prefWidth="83.0" text="Phone :" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="phoneNumber" prefHeight="50.0" prefWidth="169.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Semibold Italic" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children></VBox>
          </right>
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">

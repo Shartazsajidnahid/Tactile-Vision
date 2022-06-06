@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import Management.CurrentUser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
@@ -60,17 +62,32 @@ public class TeacherControl implements Initializable {
     private ObservableList<String> docnames;
     private ObservableList<String> imagenames;
 
-
+    private CurrentUser currentUser;
+    @FXML
+    private Label userName;
+    @FXML
+    private Label email;
+    @FXML
+    private Label phoneNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> list1 = Arrays.asList("উন্মুক্ত করা বা খোলা","অভাব আছে এমন ","কোন উপায়ে বেঁচে থাকা ");
-
-        try {
-            setOutputVbox(list1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        currentUser = CurrentUser.getInstance();
+        System.out.println("from Teacher");
+        currentUser.toString();
+        setuserdetails();
+//
+//        try {
+//            setOutputVbox(list1);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+    }
+    private void setuserdetails() {
+        userName.setText(currentUser.getName());
+        email.setText(currentUser.getEmail());
+        phoneNumber.setText(currentUser.getPhone());
     }
 
     public void setOutputVbox(List<String> list1) throws IOException {
@@ -86,7 +103,7 @@ public class TeacherControl implements Initializable {
         child.setFitToWidth(true);
 //        child.setContent(new Label("nahid"));
         Outputshow outputshowController = fxmlLoader.getController();
-        outputshowController.addLabels(list1);
+       // outputshowController.addLabels(list1);
     }
 
     @FXML
@@ -97,6 +114,29 @@ public class TeacherControl implements Initializable {
     @FXML
     void searchCourse(ActionEvent event) {
 
+    }
+
+    public void toTranslate(ActionEvent actionEvent) {
+        navigate("Translate",everything);
+    }
+    public void navigate(String tablename, Pane pane){
+        Pane view = null;
+        try {
+            URL fileUrl = HelloApplication.class.getResource(tablename+ ".fxml");
+            if(fileUrl == null){
+                throw new java.io.FileNotFoundException("fxml file not found");
+            }
+            view = new FXMLLoader().load(fileUrl);
+        }catch (Exception e){
+            System.out.println("file not found");
+        }
+        FXMLLoader login = new FXMLLoader();
+        pane.getChildren().setAll(view);
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        currentUser.setIsset(false);
+        navigate("WelcomeVbox",everything);
     }
 
 //    public void addDoclist(Map<String,ObservableList<String>> doclistMap){

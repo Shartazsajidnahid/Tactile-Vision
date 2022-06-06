@@ -1,53 +1,31 @@
 package com.example.demo;
 
 import Management.CurrentUser;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StudentController implements Initializable {
-    @FXML
-    private TableView<TableViewMark> markTable;
+public class StaffController implements Initializable {
 
-    @FXML
-    private Button addPhotos;
-
-    @FXML
-    private TextField courseID;
-
-    @FXML
-    private TableColumn<TableViewMark, String> docColumn;
-
-    @FXML
-    private TableColumn<TableViewMark, String> markColumn;
-
-    @FXML
-    private VBox everything;
+    private CurrentUser currentUser;
     @FXML
     private Label userName;
     @FXML
     private Label email;
     @FXML
     private Label phoneNumber;
-
-    private CurrentUser currentUser;
-
+    @FXML
+    private VBox everything;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        docColumn.setCellValueFactory(new PropertyValueFactory<TableViewMark,String>("docColumn"));
-        markColumn.setCellValueFactory(new PropertyValueFactory<TableViewMark,String>("markColumn"));
         currentUser = CurrentUser.getInstance();
         setuserdetails();
     }
@@ -56,20 +34,6 @@ public class StudentController implements Initializable {
         userName.setText(currentUser.getName());
         email.setText(currentUser.getEmail());
         phoneNumber.setText(currentUser.getPhone());
-    }
-
-    @FXML
-    void LogOut(ActionEvent event) {
-        currentUser.setIsset(false);
-        navigate("WelcomeVbox",everything);
-    }
-    @FXML
-    void CheckMark(ActionEvent event) {
-        ObservableList<TableViewMark> list = FXCollections.observableArrayList(
-                new TableViewMark("Nahid", "88"),
-                new TableViewMark("aaaa", "33")
-        );
-    markTable.setItems(list);
     }
 
     public void toTranslate(ActionEvent actionEvent) {
@@ -89,4 +53,11 @@ public class StudentController implements Initializable {
         FXMLLoader login = new FXMLLoader();
         pane.getChildren().setAll(view);
     }
+
+    public void LogOut(ActionEvent actionEvent) {
+        currentUser.setIsset(false);
+        navigate("WelcomeVbox",everything);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.demo;
 import LoginSignup.Login;
+import Management.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.stage.Window;
 
 
-public class WelcomeVboxControl {
+public class WelcomeVboxControl implements Initializable{
 
     @FXML
     private VBox LoginPane;
@@ -41,6 +43,8 @@ public class WelcomeVboxControl {
 
     @FXML
     private Button loginButton;
+
+    private CurrentUser currentUser;
 
 
     @FXML
@@ -64,16 +68,16 @@ public class WelcomeVboxControl {
             return;
         }
 
-
         Login login = new Login();
-        String feedback = login.logIN(userid, password);
+        List<String> feedback = login.logIN(userid, password);
         System.out.println("feedback : " + feedback);
-        if (feedback=="invalid") {
+        if (feedback.size()!=4) {
             infoBox("Please enter correct Email and Password", null, "Failed");
         }
         else {
             infoBox("Login Successful!", null, "feedback");
-            navigate(feedback, LoginPane);
+            currentUser.setUserDetails(feedback.get(0), feedback.get(1),feedback.get(2),feedback.get(3));
+            navigate(feedback.get(0), LoginPane);
         }
     }
 
@@ -138,5 +142,10 @@ public class WelcomeVboxControl {
 
     public void tologin(ActionEvent actionEvent) {
         changePage("Login");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        currentUser = CurrentUser.getInstance();
     }
 }

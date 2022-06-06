@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import DotIdentifier.App;
+import Management.CurrentUser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -60,6 +61,7 @@ public class TranslateVbox implements Initializable {
 
     private List<String> selectedFromInputlist;
     private App app;
+    private CurrentUser currentUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +70,7 @@ public class TranslateVbox implements Initializable {
         app = new App();
         inputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ListviewOutput = new HashMap<>();
+        currentUser = CurrentUser.getInstance();
     }
 
     public void addDynamicButton(ObservableList<String> names){
@@ -182,21 +185,31 @@ public class TranslateVbox implements Initializable {
         child.setFitToWidth(true);
         outputshowController.addLabels(list1);
     }
-
     public void toWelcome(ActionEvent actionEvent){
+        if(currentUser.isIsset()){
+            changeWindow(currentUser.getUserType()+"Page");
+        }
+        else{
+            changeWindow("WelcomeVbox");
+        }
+
+    }
+    private void changeWindow(String pane) {
         Pane view = null;
         try {
-            URL fileUrl = HelloApplication.class.getResource("WelcomeVbox.fxml");
+            URL fileUrl = HelloApplication.class.getResource(pane+".fxml");
             if(fileUrl == null){
-                throw new java.io.FileNotFoundException("fxml file not found");
+                throw new FileNotFoundException("fxml file not found");
             }
             view = new FXMLLoader().load(fileUrl);
+
         }catch (Exception e){
             System.out.println("file not found");
         }
         FXMLLoader login = new FXMLLoader();
         everything.getChildren().setAll(view);
     }
+
     private void changeCenterPane(BorderPane pane, String paneName){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(HelloApplication.class.getResource(paneName+".fxml"));

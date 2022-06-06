@@ -12,13 +12,13 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AdminPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("WelcomeVbox.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
-        stage.setTitle("Hello!");
+        stage.setTitle("Tactile Vision!");
         stage.setScene(scene);
 
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        System.out.println("Height: " + screenBounds.getHeight() + " Width: " + screenBounds.getWidth());
+//        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+//        System.out.println("Height: " + screenBounds.getHeight() + " Width: " + screenBounds.getWidth());
 
         stage.show();
     }
