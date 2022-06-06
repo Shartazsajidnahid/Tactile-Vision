@@ -21,6 +21,17 @@ public class CourseAddRemove implements Initializable {
     @FXML
     private TextField addCourseField;
 
+    @FXML
+    private TextField addCourseField1;
+
+    @FXML
+    private TextField addTeacherField;
+    @FXML
+    private TextField addCourseField2;
+
+    @FXML
+    private TextField addStudentField;
+
     private DButils dButils;
     private CourseUserremove courseUserremove;
 
@@ -67,10 +78,40 @@ public class CourseAddRemove implements Initializable {
 
 
     }
+    public void addSTudentToCourse(ActionEvent actionEvent) throws SQLException {
+        int courseid = Integer.parseInt(addCourseField1.getText());
+        int studentid = Integer.parseInt(addStudentField.getText());
+
+//        if (courseid) {
+//            dButils.infoBox("Fill up the fields", "" , "");
+//            return;
+//        }
+        if(courseUserremove.addStudenttoCourse(studentid, courseid)){
+            dButils.infoBox("Student added to Course added successfully", "" , "");
+            addStudentField.clear();
+            addCourseField1.clear();
+        }
+    }
+    public void addTeacherToCourse(ActionEvent actionEvent) {
+        int courseid = Integer.parseInt(addCourseField2.getText());
+        int teacherid = Integer.parseInt(addTeacherField.getText());
+
+//        if (courseid) {
+//            dButils.infoBox("Fill up the fields", "" , "");
+//            return;
+//        }
+        if(courseUserremove.addTeachertoCourse(teacherid, courseid)){
+            dButils.infoBox("Teacher added to Course added successfully", "" , "");
+            addStudentField.clear();
+            addCourseField1.clear();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.dButils = new DButils();
         this.courseUserremove = new CourseUserremove();
     }
+
+
 }

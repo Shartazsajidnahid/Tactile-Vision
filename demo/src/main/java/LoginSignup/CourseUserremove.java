@@ -31,13 +31,60 @@ public class CourseUserremove {
         String INSERT_QUERY;
         INSERT_QUERY = Add_Course;
         if(checkifAlreadyexists(name)){
-            dbutils.infoBox("Course already exits", "", "");
+            dbutils.infoBox("Course already exists", "", "");
             return false;
         }
 
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
             preparedStatement.setString(1, name);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            // print SQL exception information
+            this.dbutils.printSQLException(e);
+        }
+        return false;
+    }
+    public boolean addStudenttoCourse(int stdid,int courseid) throws SQLException {
+
+        String query = "INSERT INTO takes (StudentID,CourseID) VALUES (?,?)";
+        if(!checkifexistsbyID(stdid, "student" , "ID")){
+            dbutils.infoBox("Student doesn't exist", "", "");
+            return false;
+        }
+        if(!checkifexistsbyID(courseid, "courses" , "CourseID")){
+            dbutils.infoBox("Course doesn't exist", "", "");
+            return false;
+        }
+
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, stdid);
+            preparedStatement.setInt(2, courseid);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            // print SQL exception information
+            this.dbutils.printSQLException(e);
+        }
+        return false;
+    }
+    public boolean addTeachertoCourse(int teacherid, int courseid) {
+        String query = "INSERT INTO teaches (TeacherID,CourseID) VALUES (?,?)";
+        if(!checkifexistsbyID(teacherid, "teacher" , "ID")){
+            dbutils.infoBox("Teacher doesn't exist", "", "");
+            return false;
+        }
+        if(!checkifexistsbyID(courseid, "courses" , "CourseID")){
+            dbutils.infoBox("Course doesn't exist", "", "");
+            return false;
+        }
+
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, teacherid);
+            preparedStatement.setInt(2, courseid);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -69,8 +116,7 @@ public class CourseUserremove {
         return false;
     }
     public boolean removeUser(String name) throws SQLException {
-        // Step 1: Establishing a Connection and
-        // try-with-resource statement will auto close the connection.
+
         String parsedID = this.dbutils.parseID(name);
         int id = Integer.parseInt(parsedID);
         String parsedTable = this.dbutils.parseTable(name);
@@ -112,5 +158,24 @@ public class CourseUserremove {
             }
             return false;
         }
+    public boolean checkifexistsbyID(int id,String table, String col){
+        String query = "select * from " + table +  " where " + col + " = ?";
+
+        try (Connection connection = getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next() == false) {
+                return false;
+            } else return true;
+        } catch (SQLException e) {
+            // print SQL exception information
+            this.dbutils.printSQLException(e);
+        }
+        return false;
+    }
+
 
 }

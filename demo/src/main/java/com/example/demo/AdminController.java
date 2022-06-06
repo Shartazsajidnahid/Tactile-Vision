@@ -120,4 +120,12 @@ public class AdminController implements Initializable {
         FXMLLoader login = new FXMLLoader();
         pane.getChildren().setAll(view);
     }
+
+    public void loadAddStudenttoCourse(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "AddStudentToCourse");
+    }
+
+    public void loadAddTeachertoCourse(ActionEvent actionEvent) {
+        changeCenterPane(mainBorderPane, "AddTeacherToCourse");
+    }
 }

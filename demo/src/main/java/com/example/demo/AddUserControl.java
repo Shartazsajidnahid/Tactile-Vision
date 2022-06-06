@@ -113,6 +113,7 @@ public class AddUserControl extends AnchorPane implements Initializable {
                 return;
             }
             this.addUserUtil.addStudent(name,password,email,phone,roll,batch);
+            dButils.infoBox("User added successfully", "" , "");
             return;
         }
 
