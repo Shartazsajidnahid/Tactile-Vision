@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.example.demo.mainClass1
+Class-Path: pdfbox-app-2.0.26.jar
+
