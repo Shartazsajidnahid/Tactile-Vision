@@ -2,6 +2,8 @@ package com.example.demo;
 
 import LoginSignup.DocumentDao;
 import Management.CurrentUser;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.*;
 
@@ -60,6 +63,8 @@ public class StudentController implements Initializable {
         currentUser.toString();
         initialize_course();
     }
+
+
     private void initialize_course(){
          coursemap = documentDao.getCourses(currentUser.getId(), "Student", "Takes");
 
@@ -70,28 +75,63 @@ public class StudentController implements Initializable {
 
         coursetypes = FXCollections.observableArrayList(coursenames);
         courseCombo.setItems(coursetypes);
+
+        setactionsCombo();
     }
 
+    private void setactionsCombo(){
+        courseCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                    String filename = (String) courseCombo.getSelectionModel().getSelectedItem();
+                    showMarks(getKeysByValue(filename));
+            }
+        });
+    }
 
+    private void showMarks(int cid) {
+        HashMap<Integer, Integer> coursemarksmap = documentDao.getMarks(cid);
+        Integer totoal = 0;
+//        for (Map.Entry mapElement : coursemarksmap.entrySet()) {
+//            System.out.println("id = " + mapElement.getKey() + " mark = " + mapElement.getValue());
+//
+//        }
+        addtoTable(coursemarksmap);
+
+
+    }
+
+    private void addtoTable(HashMap<Integer, Integer> markmap) {
+        List<TableViewMark> marklisttable = new ArrayList<>();
+        for(Map.Entry mapElement : markmap.entrySet()){
+            marklisttable.add(new TableViewMark((Integer) mapElement.getKey(), (Integer) mapElement.getValue()));
+        }
+        ObservableList<TableViewMark> list = FXCollections.observableArrayList(marklisttable);
+        markTable.setItems(list);
+    }
+
+    private int getKeysByValue(String x ) {
+        int key =-1;
+
+        for (Map.Entry mapElement : coursemap.entrySet()) {
+            if(x.equals(mapElement.getValue())){
+                return (int) mapElement.getKey();
+            }
+        }
+        return key;
+    }
     private void setuserdetails() {
         userName.setText(currentUser.getName());
         email.setText(currentUser.getEmail());
         phoneNumber.setText(currentUser.getPhone());
     }
-
     @FXML
     void LogOut(ActionEvent event) {
         currentUser.setIsset(false);
         navigate("WelcomeVbox",everything);
     }
-    @FXML
-    void CheckMark(ActionEvent event) {
-        ObservableList<TableViewMark> list = FXCollections.observableArrayList(
-                new TableViewMark("Nahid", "88"),
-                new TableViewMark("aaaa", "33")
-        );
-    markTable.setItems(list);
-    }
+
+ 
 
     public void toTranslate(ActionEvent actionEvent) {
         navigate("Translate",everything);

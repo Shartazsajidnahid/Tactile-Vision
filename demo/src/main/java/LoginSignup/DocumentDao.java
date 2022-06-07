@@ -107,6 +107,24 @@ public class DocumentDao {
         }
         return "";
     }
+
+    public HashMap<Integer, Integer> getMarks(int cid) {
+        HashMap<Integer, Integer> marklist = new HashMap<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from document where courseID = ?")) {
+
+            preparedStatement.setInt(1, cid);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                 marklist.put(resultSet.getInt(1), resultSet.getInt(5));
+            }
+        } catch (SQLException e) {
+            // print SQL exception information
+            this.dbutils.printSQLException(e);
+        }
+        return marklist;
+    }
 }
 
 //    select * from "  +  table +" where "+table+"ID = ?

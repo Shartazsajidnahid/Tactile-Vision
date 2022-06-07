@@ -1,26 +1,26 @@
 package com.example.demo;
 
 public class TableViewMark {
-    private String docColumn, markColumn;
+    private Integer docColumn, markColumn;
 
-    public TableViewMark(String docColumn, String markColumn) {
+    public TableViewMark(Integer docColumn, Integer markColumn) {
         this.docColumn = docColumn;
         this.markColumn = markColumn;
     }
 
-    public String getDocColumn() {
+    public Integer getDocColumn() {
         return docColumn;
     }
 
-    public void setDocColumn(String docColumn) {
+    public void setDocColumn(Integer docColumn) {
         this.docColumn = docColumn;
     }
 
-    public String getMarkColumn() {
+    public Integer getMarkColumn() {
         return markColumn;
     }
 
-    public void setMarkColumn(String markColumn) {
+    public void setMarkColumn(Integer markColumn) {
         this.markColumn = markColumn;
     }
 }
