@@ -2,7 +2,8 @@ module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-    requires pdfbox.app;
+    requires opencv;
+    requires java.sql;
 
 
     opens com.example.demo to javafx.fxml;
