@@ -131,7 +131,7 @@ public class StudentController implements Initializable {
         navigate("WelcomeVbox",everything);
     }
 
- 
+
 
     public void toTranslate(ActionEvent actionEvent) {
         navigate("Translate",everything);

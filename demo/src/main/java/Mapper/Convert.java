@@ -68,7 +68,7 @@ public class Convert {
         }
 
 
-        return bangla;
+        return notNull(bangla);
     }
 
     private String checkpost2(String braille){
@@ -107,9 +107,7 @@ public class Convert {
         else {
             return checkpost2(braille);
         }
-
 //        System.out.println("hi 12 : " + first6 + " " + second6);
-
 
         if(first6.equals("000001")){
             if(index==word.size()-1){
@@ -123,14 +121,14 @@ public class Convert {
                     thirdBracket = true;
                 }
                 index++;
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
         }
         else if(first6.equals("001011")){
             if(curlyApostrophy){
                 curlyApostrophy = false;
                 index++;
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
             else{
                 return BD.getPunctation().get(first6);
@@ -139,16 +137,16 @@ public class Convert {
         else if(first6.equals("000011")){
             if(index==0){
                 index++;
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
             else{
-                return BD.getConsonant().get(first6);
+                return notNull(BD.getConsonant().get(first6));
             }
         }
         else if(first6.equals("001010")){
             if(word.size()==1){
                 index++;
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
             else{
                 return calc_vowel(first6);
@@ -158,7 +156,7 @@ public class Convert {
             if(thirdBracket){
                 thirdBracket = false;
                 index++;
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
             else{
 //                System.out.println("firstbracket : " + firstBracket);
@@ -175,17 +173,17 @@ public class Convert {
         }
         else if(first6.equals("000010")){
             if(word.size()==1){
-                return BD.getPunctation().get(first6);
+                return notNull(BD.getPunctation().get(first6));
             }
             else{
                 index++;
 //                System.out.println("wow" + first6+second6);
                 if((first6+second6).equals("000010111010")){
                     if(index!=0){
-                        return BD.getSymbols().get(BD.getTwelveDots().get(first6+second6));
+                        return notNull(BD.getSymbols().get(BD.getTwelveDots().get(first6+second6)));
                     }
                 }
-                return BD.getTwelveDots().get(first6+second6);
+                return notNull(BD.getTwelveDots().get(first6+second6));
             }
         }
         if(!BD.getTwelveDots().containsKey(first6+second6)){ // check if total 12 dots have a meaningful map or not
@@ -200,7 +198,7 @@ public class Convert {
         if (index + 2 < word.size()) {
             if(BD.getConsonant().containsKey(word.get(index+1)) && BD.getConsonant().containsKey(word.get(index+2))){
 //                System.out.println("yes + " + word.size()+ " " + index);
-                bangla+= BD.getConsonant().get(word.get(index+1)) + "্" + BD.getConsonant().get(word.get(index+2));
+                bangla+= notNull(BD.getConsonant().get(word.get(index+1))) + "্" + notNull(BD.getConsonant().get(word.get(index+2)));
                 index+=2;
 //                System.out.println("wow " + index + " " + word.get(index-1) + " " + word.get(index));
             }
@@ -208,7 +206,7 @@ public class Convert {
         }
         else{
             while(index<word.size()){
-                bangla += BD.getConsonant().get(word.get(index));
+                bangla += notNull(BD.getConsonant().get(word.get(index)));
                 index++;
             }
         }
@@ -218,13 +216,13 @@ public class Convert {
     private String threeJointLetter(){
         String bangla = "";
         if (index + 3 < word.size()) {
-            bangla+= BD.getConsonant().get(word.get(index+1)) + "্" + BD.getConsonant().get(word.get(index+2))+ "্" + BD.getConsonant().get(word.get(index+3));
+            bangla+= notNull(BD.getConsonant().get(word.get(index+1))) + "্" + notNull(BD.getConsonant().get(word.get(index+2)))+ "্" + notNull(BD.getConsonant().get(word.get(index+3)));
             index+=3;
         }
         else{
             index++;
             while(index<word.size()){
-                bangla+= BD.getConsonant().get(word.get(index));
+                bangla+= notNull(BD.getConsonant().get(word.get(index)));
             }
         }
         return bangla;
@@ -239,19 +237,16 @@ public class Convert {
             else if(BD.getEnglish_numbers().containsKey(braille)){
                 bangla += BD.getEnglish_numbers().get((braille));
             }
-
             else if (braille.equals("011011")) {
 //                System.out.println("firstbracketEnglish : " + firstBracket);
                 if(firstBracket){
                     firstBracket = false;
-
                     bangla +=")";
                 }
                 else{
                     firstBracket = true;
                     bangla += "(";
                 }
-
             }
         }
         return bangla;
@@ -314,6 +309,10 @@ public class Convert {
             bangla = BD.getPunctation().get(braille_cons);
         }
         return bangla;
+    }
+    private String notNull(String bangla){
+        if(bangla == null) return "";
+        else return bangla;
     }
 
 }

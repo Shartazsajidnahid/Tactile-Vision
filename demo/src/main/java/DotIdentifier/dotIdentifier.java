@@ -40,7 +40,7 @@ public class dotIdentifier {
         int width= image.getWidth();
         int blueP= 0xFF0000FF;
         int dCount=0;
-        for(int j=79;j<height-130;j++){
+        for(int j=79;j<height-230;j++){
             for(int i=195;i<width-40;i++){
                 if(j>=image.getHeight()-130) break;
                 int flag=0;
@@ -102,10 +102,10 @@ public class dotIdentifier {
         }
 //        System.out.println(countSpace);
 //        System.out.println(countS);
-//        for(int i=0;i<lineList.size();i++){
-//            System.out.print(lineList.get(i)+" ");
-//        }
-        ImageIO.write(imageToSave , "png", new File("yoyo2.png"));
+        for(int i=0;i<lineList.size();i++){
+            System.out.print(lineList.get(i)+" ");
+        }
+//        ImageIO.write(imageToSave , "png", new File("yoyo2.png"));
         Convert cv = new Convert();
         return cv.translate(lineList);
     }
