@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import LoginSignup.DButils;
 import LoginSignup.DocumentDao;
 import Management.CurrentUser;
 import javafx.beans.value.ChangeListener;
@@ -74,13 +75,19 @@ public class TeacherControl implements Initializable {
     @FXML
     private Label phoneNumber;
 
+    @FXML
+    private ComboBox<?> courseCombo;
+
+
     private DocumentDao documentDao;
     private HashMap<Integer, List<String>> doclistmap;
+    private DButils dButils;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> list1 = Arrays.asList("উন্মুক্ত করা বা খোলা","অভাব আছে এমন ","কোন উপায়ে বেঁচে থাকা ");
         documentDao = new DocumentDao();
+        dButils = new DButils();
         currentUser = CurrentUser.getInstance();
         docList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         System.out.println("from Teacher");
@@ -116,8 +123,14 @@ public class TeacherControl implements Initializable {
     }
 
     @FXML
-    void addMark(ActionEvent event) {
-
+    void addMark(ActionEvent event) throws SQLException {
+        int addmark;
+        if(!mark.getText().isEmpty()){
+            addmark = Integer.parseInt(mark.getText());
+            documentDao.addMark((Integer) docList.getSelectionModel().getSelectedItem(), addmark);
+            dButils.infoBox("mark added successfully", "", "");
+            mark.clear();
+        }
     }
     @FXML
     void searchCourse(ActionEvent event) throws SQLException {

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="everything" maxHeight="864.0" maxWidth="1536.0" minHeight="841.0" prefHeight="841.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TeacherControl">
+<VBox fx:id="everything" maxHeight="864.0" maxWidth="1536.0" minHeight="807.0" prefHeight="807.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TeacherControl">
    <children>
       <BorderPane prefHeight="90.0" prefWidth="920.0" style="-fx-background-color: #15221c;">
          <right>

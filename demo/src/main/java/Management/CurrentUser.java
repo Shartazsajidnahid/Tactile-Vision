@@ -5,8 +5,11 @@ public class CurrentUser {
 
     //make the constructor private so that this class cannot be
     //instantiated
-    private String name,email,phone, userType;
+    private String name,email,phone;
+    private int id;
     private boolean isset = false;
+    private String userType;
+
     private CurrentUser(){}
 
     //Get the only object available
@@ -16,8 +19,9 @@ public class CurrentUser {
         return instance;
     }
 
-    public void setUserDetails(String userType, String name, String email, String phone){
+    public void setUserDetails( String userType,String id, String name, String email, String phone){
         setUserType(userType);
+        setId(Integer.parseInt(id));
         setName(name);
         setEmail(email);
         setPhone(phone);
@@ -25,8 +29,13 @@ public class CurrentUser {
 //        toString();
     }
 
+    public int getId() {
+        return id;
+    }
 
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public static void setInstance(CurrentUser instance) {
         CurrentUser.instance = instance;
@@ -74,7 +83,7 @@ public class CurrentUser {
 
     @Override
     public String toString() {
-        System.out.println("CurrentUser{" + "name='" + name + ", email='" + email + ", phone='" + phone + ", isset=" + isset + "  Usertype : " +userType);
+        System.out.println("CurrentUser{" + "id = " + id + "name='" + name + ", email='" + email + ", phone='" + phone + ", isset=" + isset + "  Usertype : " +userType);
         return null;
     }
 }

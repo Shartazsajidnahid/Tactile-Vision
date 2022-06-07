@@ -71,7 +71,7 @@ public class Login {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-
+                userinfo.add(Integer.toString(resultSet.getInt(1)));
                 userinfo.add(resultSet.getString(2));
 //                userinfo.add(resultSet.getString(3));
                 userinfo.add(resultSet.getString(4));

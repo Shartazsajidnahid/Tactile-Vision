@@ -2,11 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -155,38 +155,22 @@
                      <children>
                         <VBox prefHeight="150.0" prefWidth="670.0" GridPane.hgrow="ALWAYS">
                            <children>
-                              <Label ellipsisString="SF SF " maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="256.0" text="Enter Course ID to check marks " textAlignment="RIGHT" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font name="Segoe UI Semilight Italic" size="19.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets left="111.0" top="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="89.0" prefWidth="670.0">
                                  <children>
-                                    <Label prefHeight="47.0" prefWidth="94.0" text="Course ID :">
+                                    <Label prefHeight="18.0" prefWidth="118.0" text="Select Course:">
+                                       <HBox.margin>
+                                          <Insets left="200.0" top="30.0" />
+                                       </HBox.margin>
                                        <font>
-                                          <Font name="Segoe UI Semilight" size="18.0" />
+                                          <Font name="Segoe UI Semilight" size="17.0" />
                                        </font>
-                                       <HBox.margin>
-                                          <Insets left="250.0" right="20.0" top="10.0" />
-                                       </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="courseID" prefHeight="51.0" prefWidth="213.0">
+                                    <ComboBox fx:id="courseCombo" onAction="#selectType" prefHeight="41.0" prefWidth="150.0">
                                        <HBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets bottom="10.0" top="25.0" />
                                        </HBox.margin>
-                                    </TextField>
-                                    <Button mnemonicParsing="false" onAction="#CheckMark" prefHeight="33.0" prefWidth="79.0" style="-fx-background-color: #379c75;" text="Check Mark" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets left="15.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    </ComboBox>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
                               </HBox>
                            </children>
                         </VBox>

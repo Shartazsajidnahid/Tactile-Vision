@@ -62,6 +62,7 @@ public class TranslateVbox implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fileChooser = new FileChooser();
         selectedFromInputlist = new ArrayList<>();
         selectedFromOutputlist = new ArrayList<>();
         app = new App();
@@ -69,8 +70,6 @@ public class TranslateVbox implements Initializable {
         outputImageList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ListviewOutput = new HashMap<>();
         currentUser = CurrentUser.getInstance();
-
-
     }
 
     public void addDynamicButton(ObservableList<String> names){
@@ -92,7 +91,7 @@ public class TranslateVbox implements Initializable {
 
     public void addPhotos() throws MalformedURLException {
         Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
+
         // Stage stage = (Stage)(everything.getScene().getWindow());
         List<File> fileList =  fileChooser.showOpenMultipleDialog(stage);
 

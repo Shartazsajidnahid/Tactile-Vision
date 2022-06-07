@@ -71,12 +71,12 @@ public class WelcomeVboxControl implements Initializable{
         Login login = new Login();
         List<String> feedback = login.logIN(userid, password);
         System.out.println("feedback : " + feedback);
-        if (feedback.size()!=4) {
+        if (feedback.size()!=5) {
             infoBox("Please enter correct Email and Password", null, "Failed");
         }
         else {
             infoBox("Login Successful!", null, "feedback");
-            currentUser.setUserDetails(feedback.get(0), feedback.get(1),feedback.get(2),feedback.get(3));
+            currentUser.setUserDetails(feedback.get(0), feedback.get(1),feedback.get(2),feedback.get(3), feedback.get(4));
             navigate(feedback.get(0), LoginPane);
         }
     }
